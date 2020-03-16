@@ -1,0 +1,176 @@
+
+html, body, div, span, h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, em, img, strong, sub, sup, b, i, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figure, figcaption, footer, header, hgroup,
+menu, nav, output, section, time {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+
+body {
+
+    font-family: 'Poppins';
+    font-size: 13px;
+    background-image: url(google-map.png);
+}
+
+.mainNav
+{
+    width: 100%;
+    height: 60px;
+    color: white;
+    background-color: #262626;
+    position: relative;
+}
+
+.navButtons {
+    position: absolute;
+    right: 20px;
+    bottom: 5px;
+    /* transform: translateX(-50%); */
+}
+.navButton{
+    margin-right:20px;
+    float: left;
+    font-size: 18px;
+    width: 100px;
+    letter-spacing: 1px;
+    text-align: center;
+    text-transform: uppercase;
+    border-bottom: 1px solid transparent;
+}
+
+.navButton > a{
+    color: white;
+    text-decoration: none;
+}
+.navButton:hover{
+    border-color: #00ffff;
+
+}
+.mainTableDiv{
+
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    color: white;
+    width: 100%;
+}
+
+.mainTableDiv  table{
+    font-family: 'Roboto';
+    font-weight: 300;
+    font-size: 13px;
+    border-collapse: collapse;
+    background-color: #4d4d4d;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.mainTableDiv  table  th{
+
+    text-align: left;
+    background-color: #262626;
+    padding: 10px 5px 10px 5px;
+}
+
+.mainTableDiv  table  th:hover {
+
+    background-color: #262626;
+}
+
+.mainTableDiv  table  td{
+
+    position: relative;
+    letter-spacing:2px;
+    padding: 10px 5px 10px 5px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.mainTableDiv  table tr{
+    height: 10px;
+}
+
+.mainTableDiv  table tr:hover{
+
+    height: 10px;
+    background-color: #737373;
+}
+
+.fontelloIcon:hover{
+    cursor: pointer;
+}
+
+#sideBar{
+    color:white;
+    position: fixed;
+    right: -150px;
+    top: 110px;
+}
+
+.addNewButton{
+
+    text-align: center;
+    width: 180px;
+    border: 1px solid #00ffff;
+    margin-bottom: 10px;
+    padding: 10px;
+    position: relative;
+}
+
+.addNewButton a {
+
+    color: white;
+    text-decoration: none;
+}
+
+.addNewButton:hover{
+    background-color: #00ffff;
+    color: black;
+    cursor: pointer;
+}
+
+.addNewButton a:hover{
+    color: black;
+}
+
+.select-tiems{
+    background-color:  #262626;
+}
+
+.fontelloAddNew{
+    position: absolute;
+    top: 7px;
+    left: 10px;
+    font-size: 18px;
+}
+
+#listOfElements{
+    display: none;
+}
+
+
+#addSomeRoutes{
+
+    width: 50%;
+    height: 200px;
+    position: absolute;
+    top: 200px;
+    left: 25%;
+    line-height: 200px;
+    color: white;
+    font-size: 20px;
+    text-align: center;
+    opacity: 0.8;
+    background-color: #262626;
+
+}

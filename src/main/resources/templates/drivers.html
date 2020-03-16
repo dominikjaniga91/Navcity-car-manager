@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="/main-style.css" />
+    <link rel="stylesheet" type="text/css" href="/addRoute.css" />
+    <link rel="stylesheet" type="text/css" href="/addForm.css" />
+    <link rel="stylesheet" type="text/css" href="/fontello/css/fontello.css" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300&display=swap" rel="stylesheet">
+    <title>Waypoints in Directions</title>
+  </head>
+  <body>
+  <script async src="script.js"></script>
+    <nav>
+      <div class="mainNav">
+          <div class="navButtons">
+              <div class="navButton" style="width:120px"><a href="mainPanel.html" th:href="@{/}" >Routes</a></div>
+              <div class="navButton"><a href="reports.html" th:href="@{/showReportsPage}" >Reports</a></div>
+              <div class="navButton"><a href="cars.html" th:href="@{/carsList}" >Cars</a></div>
+              <div class="navButton"><a  href="drivers.html" th:href="@{/driversList}" >Drivers</a></div>
+              <div class="navButton">Log out</div>
+          </div>
+      </div>
+    </nav>
+    <main>
+        <div class="mainTableDiv">
+            <table>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>First name</th>
+                    <th>Last name</th>
+                    <th>Licence</th>
+                    <th>Distance</th>
+                    <th>Time on the road</th>
+                    <th style="width: 70px;"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="driver: ${listOfDrivers}">
+                    <td  th:text="${driver.id}"></td>
+                    <td  th:text="${driver.firtsName}"></td>
+                    <td  th:text="${driver.lastName}"></td>
+                    <td  th:text="${driver.licence}"> </td>
+                    <td  th:text="${driver.distance}"> </td>
+                    <td  th:text="${driver.getLocalTimeDuration()}"> </td>
+                    <td>
+                        <a th:href="@{/deleteDriver(driverId=${driver.id})}">
+                            <i class="icon-trash-2 fontelloIcon"></i>
+                        </a>
+                        <a th:href="@{/addDriverForm(driverId=${driver.id})}">
+                            <i class="icon-cog-1 fontelloIcon"></i>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="sideBar">
+            <div class="addNewButton"><i class="icon-cab fontelloAddNew"></i>&nbsp;&nbsp;<a href="addCar.html" th:href="@{/addCarForm}" >ADD NEW CAR</a></div>
+            <div class="addNewButton"><i class="icon-user-plus fontelloAddNew"></i>&nbsp;&nbsp;<a href="addDriver.html" th:href="@{/addDriverForm}">ADD NEW DRIVER</a></div>
+            <div class="addNewButton"><i class="icon-plus-circled fontelloAddNew"></i>&nbsp;&nbsp;<a href="addRoute.html" th:href="@{/addRouteForm}" >ADD NEW ROUTE</a></div>
+        </div>
+    </main>
+    
+      
+  </body>
+</html>

@@ -1,0 +1,144 @@
+html, body, div, span, h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, em, img, strong, sub, sup, b, i, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figure, figcaption, footer, header, hgroup,
+menu, nav, output, section, time {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+body {
+
+    font-family: 'Poppins';
+    font-size: 13px;
+    background-image: url(google-map.png);
+}
+
+.addFormContainer{
+    margin-top: 100px;
+    width: 500px;
+    height: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    background-color: #262626;
+}
+
+.mainAddForm{
+    margin-top: 50px;
+    width: 300px;
+    height: 500px;
+    position: relative;
+    font-family: 'Poppins';
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.errorDiv{
+
+    height: 21px;
+    width: 300px;
+}
+
+.errorDiv > p {
+
+    margin: 2px 0 0;
+    height: 21px;
+    color:white;
+    border: none;
+    border-radius: 0px 0px 5px 5px;
+    padding-left: 5px;
+    background-color: #ff3333;
+}
+
+.inputForm{
+    font-size: 15px;
+    color: white;
+    background: none;
+    border: none;
+    border-bottom:solid 1px;
+    font-family: 'Poppins';
+    width: 300px;
+    padding-top: 5px;
+}
+
+.inputForm:hover{
+
+    border-color: #00ffff;
+   
+}
+
+.inputTextArea{
+    width: 300px;
+}
+
+.submitButton{
+    font-family: 'Poppins';
+    background-color: #00ffff;
+    border: none;
+    width: 135px;
+    height: 40px;
+    display: block;
+    float: left;
+    margin-left: 10px;
+}
+
+.submitButton:hover{
+    cursor: pointer;
+    background-color: #00cccc;
+    color: white;
+}
+
+.saveRouteButton{
+    position: absolute;
+    bottom: 20px;
+    margin-left: 50%;
+    margin-right: 50%;
+    display: block;
+    transform: translateX(-50%);
+}
+
+.routeButton{
+    text-align: center;
+    line-height: 40px;
+    display: block;
+}
+
+.confirmRouteButton{
+    position: absolute;
+    display: none;
+    right:10px;
+    z-index: 2;
+}
+
+.cancelRouteButton{
+    position: absolute;
+    display: none;
+    left: 0px;
+    z-index: 2;
+    text-align: center;
+    line-height: 40px;
+}
+
+.centerDivButton{
+
+    text-align: center;
+    line-height: 40px;
+}
+
+
+select > option{
+    color: white;
+    background-color: #262626;
+    border: none;
+}
+
+
+
+

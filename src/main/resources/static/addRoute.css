@@ -1,0 +1,92 @@
+
+html, body, div, span, h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, em, img, strong, sub, sup, b, i, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figure, figcaption, footer, header, hgroup,
+menu, nav, output, section, time {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+body {
+
+    font-family: 'Poppins';
+    font-size: 13px;
+    background-image: url(google-map.png);
+
+}
+ /* =-------------------------------  google maps details  ---------------------------------- */
+
+#right-panel {
+    font-family: 'Roboto','sans-serif';
+    line-height: 30px;
+    padding-left: 10px;
+  }
+
+#right-panel select, #right-panel input {
+    font-size: 15px;
+}
+
+#right-panel select {
+    width: 100%;
+}
+
+#right-panel i {
+    font-size: 12px;
+}
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+#map {
+    height: 500px;
+    float: left;
+    width: 600px;
+    margin-top: 100px;
+    margin-left: 50px;
+}
+#right-panel {
+    margin: 20px;
+    border-width: 2px;
+    width: 20%;
+    height: 400px;
+    float: left;
+    text-align: left;
+    padding-top: 0;
+}
+#directions-panel {
+
+    position: absolute;
+    color: white;
+    bottom: 0px;
+    right:0px;
+    width: 600px;
+    height: 80px;
+    opacity: 0.8;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #262626;
+    display: none;
+    z-index: 1;
+   
+}
+
+#directions-panel p{
+
+    margin-left: 20px;
+}
+
+.routeMainContainer{
+    position: relative;
+    width:1150px;
+    height:600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+

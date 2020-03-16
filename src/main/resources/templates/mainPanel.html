@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="/main-style.css" />
+    <link rel="stylesheet" type="text/css" href="/addRoute.css" />
+    <link rel="stylesheet" type="text/css" href="/addForm.css" />
+    <link rel="stylesheet" type="text/css" href="/fontello/css/fontello.css" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300&display=swap" rel="stylesheet">
+    <title>Waypoints in Directions</title>
+  </head>
+  <body>
+  <script async src="script.js"></script>
+    <nav>
+      <div class="mainNav">
+        <div class="navButtons">
+            <div class="navButton" style="width:120px"><a href="mainPanel.html" th:href="@{/}" >Routes</a></div>
+            <div class="navButton"><a  th:href="@{/showReportsPage}" >Reports</a></div>
+            <div class="navButton"><a href="cars.html" th:href="@{/carsList}" >Cars</a></div>
+            <div class="navButton"><a  href="drivers.html" th:href="@{/driversList}" >Drivers</a></div>
+            <div class="navButton">Log out</div>
+        </div>
+      </div>
+    </nav>
+    <main>
+        <div id="addSomeRoutes"> There's no route, add some using side panel</div>
+        <div id="listOfElements" class="mainTableDiv" style="float: left">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Departure time</th>
+                        <th>Arrival time</th>
+                        <th>Departure from</th>
+                        <th>Arrival to</th>
+                        <th>Car</th>
+                        <th>Driver</th>
+                        <th>Distance</th>
+                        <th>Duration</th>
+                        <th style="width: 70px;"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="route: ${listOfRoutes}">
+                        <td  th:text="${route.id}"></td>
+                        <td  th:text="${route.routeName}"></td>
+                        <td  th:text="${route.departureDate}"></td>
+                        <td  th:text="${route.arrivalDate}"></td>
+                        <td  th:text="${route.departureAddress}"></td>
+                        <td  th:text="${route.destinationAddress}"></td>
+                        <td  th:text="${route?.car?.returnShortDetails()}"></td>
+                        <td  th:text="${route?.driver?.returnShortDetails()}"></td>
+                        <td  th:text="${route.distance}"></td>
+                        <td  th:text="${route.getLocalTimeDuration()}"></td>
+                        <td>
+                            <a th:href="@{/deleteRoute(routeId=${route.id})}">
+                                <i class="icon-trash-2 fontelloIcon"></i>
+                            </a>
+                            <a th:href="@{/addRouteForm(routeId=${route.id})}">
+                                <i class="icon-cog-1 fontelloIcon"></i>
+                            </a>
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="sideBar">
+            <div class="addNewButton"><i class="icon-cab fontelloAddNew"></i>&nbsp;&nbsp;<a href="addCar.html" th:href="@{/addCarForm}" >ADD NEW CAR</a></div>
+            <div class="addNewButton"><i class="icon-user-plus fontelloAddNew"></i>&nbsp;&nbsp;<a href="addDriver.html" th:href="@{/addDriverForm}">ADD NEW DRIVER</a></div>
+            <div class="addNewButton"><i class="icon-plus-circled fontelloAddNew"></i>&nbsp;&nbsp;<a href="addRoute.html" th:href="@{/addRouteForm}" >ADD NEW ROUTE</a></div>
+        </div>
+    </main>
+    
+      
+  </body>
+</html>

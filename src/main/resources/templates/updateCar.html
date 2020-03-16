@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Waypoints in Directions</title>
+    <link rel="stylesheet" type="text/css" href="/main-style.css" />
+    <link rel="stylesheet" type="text/css" href="/carDriverUpdate.css" />
+    <link rel="stylesheet" type="text/css" href="/fontello/css/fontello.css" />
+    <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet"> 
+</head>
+<body>
+    <script async src="table-script.js"></script>
+    <div class="carDriverFormContainer">
+        <form action="addCar" th:action="@{/updateCar}" th:object="${car}" class="mainUpdateForm" method="POST">
+            <input type="hidden" th:name="carId" th:value="*{id}">
+            <input type="hidden" th:field="*{id}">
+            <input type="text" class="inputForm" th:field="*{brand}" placeholder="Brand"  required>
+            <input type="text" class="inputForm" th:field="*{model}" placeholder="Model"  required><br>
+            <div class="errorDiv"><p th:if="${#fields.hasErrors('brand')}" th:errors="*{brand}"></p></div>
+            <div class="errorDiv"><p th:if="${#fields.hasErrors('model')}" th:errors="*{model}"></p></div><br>
+            <input type="text" class="inputForm" th:field="*{vinNumber}" placeholder="Vin number" pattern="^[a-zA-z0-9]+$" required>
+            <select class="inputForm" th:field="*{color}" required>
+                <option selected th:value="*{color}"></option>>
+                <option th:each="colorOption: ${colors}" th:value="${colorOption}" th:utext="${colorOption}" ></option>
+            </select><br>
+            <div class="errorDiv"><p th:if="${#fields.hasErrors('vinNumber')}" th:errors="*{vinNumber}"></p></div>
+            <div class="errorDiv"><p th:if="${#fields.hasErrors('color')}" th:errors="*{color}"></p></div><br>
+            <input type="number" class="inputForm" th:field="*{productionYear}" placeholder="Production year" pattern="^[0-9]+4" required>
+            <textarea rows="2" class="inputTextArea inputForm" th:field="*{notes}" placeholder="Notes - max 225 chars" ></textarea><br>
+            <div class="errorDiv"><p th:if="${#fields.hasErrors('productionYear')}" th:errors="*{productionYear}"></p></div>
+
+            <div class="submitButton centerDivButton cancelPosition " onclick="window.history.back();">Cancel</div>
+            <button class="submitButton submitPosition" type="submit">Save car</button>
+        </form>
+    </div>
+    <div id="listOfElements" class="mainTableDiv">
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Departure time</th>
+                <th>Arrival time</th>
+                <th>Departure from</th>
+                <th>Arrival to</th>
+                <th>Driver</th>
+                <th>Distance</th>
+                <th>Duration</th>
+                <th style="width: 70px;"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="route: ${listOfRoutes}">
+                <td  th:text="${route.id}"></td>
+                <td  th:text="${route.routeName}"></td>
+                <td  th:text="${route.departureDate}"></td>
+                <td  th:text="${route.arrivalDate}"></td>
+                <td  th:text="${route.departureAddress}"></td>
+                <td  th:text="${route.destinationAddress}"></td>
+                <td  th:text="${route.driver.returnShortDetails()}"></td>
+                <td  th:text="${route.distance}"></td>
+                <td  th:text="${route.getLocalTimeDuration()}"></td>
+                <td>
+                    <a th:href="@{/addRouteForm(routeId=${route.id})}">
+                        <i class="icon-cog-1 fontelloIcon"></i>
+                    </a>
+                </td>
+
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    
+</body>

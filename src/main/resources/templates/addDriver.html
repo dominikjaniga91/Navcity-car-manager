@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+        <meta charset="utf-8">
+        <title>Waypoints in Directions</title>
+        <link rel="stylesheet" type="text/css" href="main-style.css" />
+        <link rel="stylesheet" type="text/css" href="addRoute.css" />
+        <link rel="stylesheet" type="text/css" href="carDriverUpdate.css" />
+        <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div class="addFormContainer">
+            <form action="#" style="padding-top: 50px;" th:action="@{/addDriver}" th:object="${driver}" class="mainAddForm" method="POST">
+                <input type="hidden" th:name="driverId" th:value="*{id}">
+                <input type="hidden" th:field="*{id}">
+                <input type="text" class="inputForm" th:field="*{firtsName}" placeholder="First name" required><br>
+                <div class="errorDiv"><p th:if="${#fields.hasErrors('firtsName')}" th:errors="*{firtsName}"></p></div><br/>
+                <input type="text" class="inputForm" th:field="*{lastName}" placeholder="Last name" required><br>
+                <div class="errorDiv"><p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></p></div><br/>
+                <input type="text" class="inputForm" th:field="*{licence}" placeholder="Licence" required><br>
+                <div class="errorDiv"><p th:if="${#fields.hasErrors('licence')}" th:errors="*{licence}"></p></div><br/>
+                <div class="submitButton centerDivButton" onclick="window.history.back();">Cancel</div>
+                <button class="submitButton" type="submit">Save driver</button>
+            </form>
+        </div>
+    </body>

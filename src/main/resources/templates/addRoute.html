@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="/main-style.css" />
+    <link rel="stylesheet" type="text/css" href="/addRoute.css" />
+    <link rel="stylesheet" type="text/css" href="/addForm.css" />
+    <title>Waypoints in Directions</title>
+    <style>
+      
+    </style>
+  </head>
+  <body>
+    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDW4Gk-hsR73QEJi0SthtSDGu2E3dpv3j0&callback=initMap"></script>
+    <script async src="/route.js"></script>
+
+    
+      <div class="routeMainContainer">
+        <div class="addFormContainer" style="float:left; ">
+              <form  class="mainAddForm" action=# th:action="@{/addRoute}" th:object="${route}"  style="margin-top:30px;" method="POST">
+                <input type="hidden" th:field="*{id}">
+                <input type="hidden" th:name="routeId" th:value="*{id}">
+                <input type="hidden" id="distance" th:field="*{distance}">
+                <input type="hidden" id="duration" th:field="*{duration}"><br/>
+                <input type="text"  class="inputForm" th:field="*{routeName}" placeholder="Route name" >
+                <div class="errorDiv"><p th:if="${#fields.hasErrors('routeName')}" th:errors="*{routeName}"></p></div>
+                <input type="datetime-local"  class="inputForm" th:field="*{departureDate}" placeholder="Departure date" onfocus="(this.type='datetime-local')" >
+                <div class="errorDiv"><p th:if="${#fields.hasErrors('departureDate')}" th:errors="*{departureDate}"></p></div>
+                <input type="datetime-local"  class="inputForm" th:field="*{arrivalDate}" placeholder="Arrival date"  onfocus="(this.type='datetime-local')" >
+                <div class="errorDiv"><p th:if="${#fields.hasErrors('global')}" th:errors="*{global}"></p></div>
+                <input type="text" id="start" class="inputForm" th:field="*{departureAddress}" placeholder="Departure place" >
+                <div class="errorDiv"><p th:if="${#fields.hasErrors('departureAddress')}" th:errors="*{departureAddress}"></div>
+                <input type="text" id="end" class="inputForm" th:field="*{destinationAddress}" placeholder="Destination place" >
+                <div class="errorDiv"><p th:if="${#fields.hasErrors('destinationAddress')}" th:errors="*{destinationAddress}"></p></div>
+                <select class="inputForm" th:name="carId"  required>
+                  <option  value="" disabled th:selected="${myCarId == null}" >Select car</option>
+                  <option th:each="car: ${listOfCars}"
+                          th:value="${car.getId()}"
+                          th:selected="${car.getId() == myCarId}"
+                          th:utext="${car}"></option>
+                </select><br/><br/>
+                <select class="inputForm" th:name="driverId" required>
+                  <option value="" disabled selected>Select driver</option>
+                  <option th:each="driver: ${listOfDrivers}"
+                          th:value="${driver.getId()}"
+                          th:selected="${driver.getId() == myDriverId}"
+                          th:utext="${driver}"></option>
+                </select><br/><br/>
+                <button class="submitButton confirmRouteButton" id="confirmRoute"  type="submit">Confirm route</button>
+                <div class="submitButton routeButton" id="backToMenu" onclick="window.history.back();">Back to menu</div>
+                <div class="submitButton cancelRouteButton" id="cancelRoute" onclick="showAddingRoute()"  >Cancel</div>
+                <div class="submitButton routeButton"  id="submit" onclick="showRouteDetails()" >Save data</div>
+              </form>
+        </div>
+        <div id="directions-panel"></div>
+        <div id="map"></div>
+    </div>
+   
+    
+  </body>
+</html>

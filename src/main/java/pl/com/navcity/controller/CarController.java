@@ -1,0 +1,86 @@
+package pl.com.navcity.controller;
+
+import pl.com.navcity.model.Car;
+import pl.com.navcity.model.Color;
+import pl.com.navcity.service.CarServiceImpl;
+import pl.com.navcity.service.RouteServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.validation.Valid;
+
+@Controller
+public class CarController {
+
+   @Autowired
+   CarServiceImpl carService;
+
+   @Autowired
+    RouteServiceImpl routeService;
+
+    @GetMapping("/carsList")
+    public String showCarList(Model model){
+
+        model.addAttribute("listOfCars", carService.getAllCars());
+        return "cars";
+    }
+
+   @GetMapping("/addCarForm")
+   public String prepareAddCarForm(@RequestParam(value = "carId", required = false) Integer carId, Model model){
+
+       model.addAttribute("colors", Color.values());
+        if(carId != null){
+            Car car = carService.getCarById(carId);
+            model.addAttribute("car", car);
+            model.addAttribute("listOfRoutes", car.getRouteList());
+            return "updateCar";
+        } else{
+            model.addAttribute("car", new Car());
+            return "addCar";
+        }
+    }
+
+   @PostMapping("/addCar")
+    public String createCar(@Valid Car car, BindingResult bindingResult, Model model){
+
+        if(bindingResult.hasErrors()){
+
+           model.addAttribute("validation", "data is invalid");
+           System.out.println("data is invalid");
+           return "addCar";
+       }
+
+       carService.saveCar(car);
+
+       return "redirect:/carsList";
+   }
+
+   @PostMapping("/updateCar")
+   public String  updateCar(@Valid Car car,
+                            BindingResult bindingResult,
+                            @RequestParam("carId") Integer carId,
+                            Model model){
+
+        if(bindingResult.hasErrors()){
+            model.addAttribute("colors", Color.values());
+            return "updateCar";
+        }
+
+       carService.updateCar(carId, car);
+
+       return "redirect:/carsList";
+   }
+
+   @GetMapping(path="/deleteCar")
+    public String deleteCarFromDatabase(@RequestParam("carId") Integer carId){
+
+        carService.deleteCarById(carId);
+        return "redirect:/carsList";
+   }
+
+}

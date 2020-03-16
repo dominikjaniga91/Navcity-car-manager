@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Waypoints in Directions</title>
+    <link rel="stylesheet" type="text/css" href="/addForm.css" />
+    <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet"> 
+</head>
+<body>
+    <div class="addFormContainer">
+        <form action="addCar" style="padding-top: 50px;" th:action="@{/addCar}" th:object="${car}" class="mainAddForm" method="POST">
+            <input type="hidden" th:name="carId" th:value="*{id}">
+            <input type="hidden" th:field="*{id}">
+            <input type="text" class="inputForm" th:field="*{brand}" placeholder="Brand"  required><br/>
+            <div class="errorDiv"><p th:if="${#fields.hasErrors('brand')}" th:errors="*{brand}"></p></div>
+            <input type="text" class="inputForm" th:field="*{model}" placeholder="Model"  required><br/>
+            <div class="errorDiv"><p th:if="${#fields.hasErrors('model')}" th:errors="*{model}"></p></div>
+            <input type="text" class="inputForm" th:field="*{vinNumber}" placeholder="Vin number" pattern="^[a-zA-z0-9]+$" required><br/>
+            <div class="errorDiv"><p th:if="${#fields.hasErrors('vinNumber')}" th:errors="*{vinNumber}"></p></div>
+            <select class="inputForm" th:field="*{color}" required>
+                <option selected th:value="*{color}"></option>>
+                <option th:each="colorOption: ${colors}" th:value="${colorOption}" th:utext="${colorOption}" ></option>
+            </select><br/>
+            <div class="errorDiv"><p th:if="${#fields.hasErrors('color')}" th:errors="*{color}"></p></div>
+            <input type="number" class="inputForm" th:field="*{productionYear}" placeholder="Production year" pattern="^[0-9]+4" required><br/>
+            <div class="errorDiv"><p th:if="${#fields.hasErrors('productionYear')}" th:errors="*{productionYear}"></p></div><br/>
+            <textarea rows="2" class="inputTextArea inputForm" th:field="*{notes}" placeholder="Notes" ></textarea><br><br>
+            <div class="submitButton centerDivButton" onclick="window.history.back();">Cancel</div>
+            <button class="submitButton" type="submit">Save car</button>
+        </form>
+    </div>
+
+    
+</body>
