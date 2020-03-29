@@ -13,13 +13,7 @@ menu, nav, output, section, time {
     vertical-align: baseline;
 }
 
-body {
 
-    font-family: 'Poppins';
-    font-size: 13px;
-    background-image: url(google-map.png);
-
-}
  /* =-------------------------------  google maps details  ---------------------------------- */
 
 #right-panel {

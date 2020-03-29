@@ -16,7 +16,8 @@ menu, nav, output, section, time {
 
 body {
 
-    font-family: 'Poppins';
+    font-family: 'Roboto';
+    font-weight: 300;
     font-size: 13px;
     background-image: url(google-map.png);
 }
