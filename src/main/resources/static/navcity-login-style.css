@@ -1,0 +1,233 @@
+html, body, div, span, h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, em, img, strong, sub, sup, b, i, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figure, figcaption, footer, header, hgroup,
+menu, nav, output, section, time {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    color: white;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+@keyframes appear{
+
+    0%{
+        top:0;
+        right: -410px;
+        display: none;
+    }
+    100%{
+        top:0;
+        right:0;
+        display: block;
+    }
+}
+
+body{
+    
+    font-family: 'Roboto';
+    font-size: 15px;
+    margin: 0;
+    background-image: url(smartphone.jpg);
+    background-size:  37%;
+    background-repeat: no-repeat;
+}
+
+#navcity-logo{
+
+
+    width: 1fr;
+    height: auto;
+}
+.login{
+
+    background-color: #262626;
+    width: 73%;
+    height: 100% ;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+
+.login__container{
+   
+    margin-top: 10%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 66%;
+    height: 66% ;
+    position: relative;
+}
+.hide__form{
+
+    display: none;
+}
+
+.signup__form{
+
+  
+    width: 49.8%;
+    height: 100%;
+    float: left;
+    position: absolute;
+    top:0;
+    right:0;
+    animation: appear 1s ease;
+}   
+
+.login__form{
+
+  
+    width: 49.8%;
+    height: 100%;
+    float: left;
+    position: absolute;
+    top:0;
+    right:0;
+    display: block;
+}
+
+
+.login__social{
+
+    border-right: 0.5px solid aqua;
+    width: 49.8%;
+    height: 100%;
+    float: left;
+    position: absolute;
+    top:0;
+    left:0;
+
+}
+
+h2{
+
+    font-size: 30px;
+    color: aliceblue;
+    width: 100%;
+    text-align: center;
+    margin-top: 30%;
+}
+
+h3{
+
+    font-size: 15px;
+    color: aliceblue;
+    width: 100%;
+    text-align: center;
+}
+
+h3 > span {
+    color: #00ffff;
+    cursor: pointer;
+}
+
+.mainAddForm{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 350px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    padding: 5px 5px 5px 5px;
+    
+}
+
+.errorDiv{
+
+    height: 21px;
+    width: 100%;
+
+}
+
+.errorDiv > p {
+
+    margin: 2px 0 0;
+    height: 21px;
+    color:white;
+    border: none;
+    border-radius: 0px 0px 5px 5px;
+    padding-left: 5px;
+    background-color: #ff3333;
+
+}
+
+.inputForm{
+    font-size: 15px;
+    color: white;
+    background: none;
+    border: none;
+    border-bottom:solid 1px;
+    width:100%;
+    padding-top: 5px;
+
+}
+
+.inputForm:hover{
+
+    border-color: #00ffff;
+   
+}
+
+
+.submitButton{
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #00ffff;
+    border: none;
+    width: 135px;
+    height: 40px;
+    display: block;
+}
+
+.submitButton:hover{
+    cursor: pointer;
+    background-color: #00cccc;
+    color: white;
+}
+
+#navcity__header{
+
+    position: absolute;
+    top: 13%;
+    left: 10%;
+    font-size: 30px;
+    width: 300px;
+    
+    
+}
+#navcity__name{
+    font-size: 70px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #00cccc;
+    text-align: center;
+}
+
+#navcity__header > p {
+    width: 300px;
+    margin: 0;
+    text-align: right;
+
+}
+
+.icon{
+
+    color: #00cccc;
+    font-size: 50px;
+    margin-left: 2%;
+    
+}
+
+#social__icons{
+    text-align: center;
+    margin-top: 20%;
+}

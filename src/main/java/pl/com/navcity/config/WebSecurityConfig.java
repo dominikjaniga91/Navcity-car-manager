@@ -32,7 +32,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/drivers/**").hasRole("DRIVER")
                 .antMatchers("/showReportsPage").hasRole("DRIVER")
                 .and()
-                .formLogin().permitAll()
+                .formLogin().loginPage("/login-form").permitAll()
                 .and()
                 .logout().permitAll();
 
