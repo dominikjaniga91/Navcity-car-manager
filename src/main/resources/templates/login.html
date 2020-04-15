@@ -38,8 +38,11 @@
           <input type="password" class="inputForm" th:field="*{password}" placeholder="Password"required><br/>
           <div class="errorDiv"><p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p></div><br/>
           <select class="inputForm" th:field="*{authority}" required>
-            <option selected th:value="*{authority}"></option>>
-            <option th:each="authority: ${authorities}" th:value="${authority}" th:utext="${authority}" ></option>
+            <option selected disabled value=""></option>>
+            <option th:each="authority: ${authorities}"
+                    th:value="${authority}"
+                    th:utext="${authority}" >
+            </option>
           </select><br/>
           <div class="errorDiv"><p th:if="${#fields.hasErrors('authority')}" th:errors="*{authority}"></p></div>
           <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
@@ -49,12 +52,15 @@
       <div id="login__id" class="login__form">
         <h2 id="signup__header">Login to your account </h2>
         <h3 id="signup__inner">Don't have an account? <span id="show__signup">Sing up free</span> </h3>
-        <form action="/login" th:action="@{/login}" th:object="${user}" class="mainAddForm" method="POST">
-          <input type="text" class="inputForm" th:field="*{username}" placeholder="Email"  required><br/>
-          <div class="errorDiv"><p th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p></div>
-          <input type="password" class="inputForm" th:field="*{password}" placeholder="Password"required><br/>
-          <div class="errorDiv"><p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p></div><br/>
-          <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+        <form action="/authenticateTheUser" th:action="@{/authenticateTheUser}" class="mainAddForm" method="POST">
+          <span th:if="${param.error}">
+              <div class="errorDiv">
+                <p>Invalid username and password.</p>
+              </div>
+          </span>
+          <input type="text" class="inputForm" name="username" placeholder="Email"  required><br/><br/>
+          <input type="password" class="inputForm" name="password" placeholder="Password"required><br/>
+          <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /><br/>
           <button class="submitButton" type="submit">Login</button>
         </form>
       </div>

@@ -30,7 +30,7 @@ public class RouteController {
     @Autowired
     RouteServiceImpl routeService;
 
-    @GetMapping(path ="/")
+    @GetMapping(path ="/routes")
     public String showMenu(Model model){
         model.addAttribute("listOfRoutes", routeService.getAllRoutes());
         return "mainPanel";
