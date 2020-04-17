@@ -4,7 +4,8 @@ public enum Authorities {
 
     ROLE_DRIVER("Driver"),
     ROLE_ADMIN("Admin"),
-    ROLE_MANAGER("Manager");
+    ROLE_MANAGER("Manager"),
+    ROLE_USER("User");
 
     String value;
 

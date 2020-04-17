@@ -1,5 +1,6 @@
 package pl.com.navcity.controller;
 
+import org.springframework.web.bind.annotation.RequestMapping;
 import pl.com.navcity.model.Car;
 import pl.com.navcity.model.Color;
 import pl.com.navcity.service.CarServiceImpl;
@@ -15,22 +16,27 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.validation.Valid;
 
 @Controller
+@RequestMapping("/api/cars")
 public class CarController {
 
-   @Autowired
-   CarServiceImpl carService;
 
-   @Autowired
-    RouteServiceImpl routeService;
+    private CarServiceImpl carService;
+    private RouteServiceImpl routeService;
 
-    @GetMapping("/carsList")
+    @Autowired
+    public CarController(CarServiceImpl carService, RouteServiceImpl routeService) {
+        this.carService = carService;
+        this.routeService = routeService;
+    }
+
+    @GetMapping("/list")
     public String showCarList(Model model){
 
         model.addAttribute("listOfCars", carService.getAllCars());
         return "cars";
     }
 
-   @GetMapping("/addCarForm")
+   @GetMapping("/car-form")
    public String prepareAddCarForm(@RequestParam(value = "carId", required = false) Integer carId, Model model){
 
        model.addAttribute("colors", Color.values());
@@ -45,7 +51,7 @@ public class CarController {
         }
     }
 
-   @PostMapping("/addCar")
+   @PostMapping("/add-car")
     public String createCar(@Valid Car car, BindingResult bindingResult, Model model){
 
         if(bindingResult.hasErrors()){
@@ -57,10 +63,10 @@ public class CarController {
 
        carService.saveCar(car);
 
-       return "redirect:/carsList";
+       return "redirect:/api/cars/list";
    }
 
-   @PostMapping("/updateCar")
+   @PostMapping("/update-car")
    public String  updateCar(@Valid Car car,
                             BindingResult bindingResult,
                             @RequestParam("carId") Integer carId,
@@ -73,14 +79,14 @@ public class CarController {
 
        carService.updateCar(carId, car);
 
-       return "redirect:/carsList";
+       return "redirect:/api/cars/list";
    }
 
-   @GetMapping(path="/deleteCar")
+   @GetMapping(path="/delete-car")
     public String deleteCarFromDatabase(@RequestParam("carId") Integer carId){
 
         carService.deleteCarById(carId);
-        return "redirect:/carsList";
+        return "redirect:/api/cars/list";
    }
 
 }

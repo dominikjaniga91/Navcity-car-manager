@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+
     <head>
         <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
         <meta charset="utf-8">
@@ -10,151 +10,155 @@
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,300&display=swap" rel="stylesheet">
         <title>Navcity - reports</title>
     </head>
-</head>
-<body>
-<script async src="reports.js"></script>
-<script async src="table-script.js"></script>
-<nav>
-    <div class="mainNav">
-        <div class="navButtons">
-            <div class="navButton" style="width:120px"><a href="mainPanel.html" th:href="@{/}" >Routes</a></div>
-            <div class="navButton"><a href="reports.html" th:href="@{/showReportsPage}" >Reports</a></div>
-            <div class="navButton"><a href="cars.html" th:href="@{/carsList}" >Cars</a></div>
-            <div class="navButton"><a  href="drivers.html" th:href="@{/driversList}" >Drivers</a></div>
-            <div class="navButton"><a  href="/logout" th:href="@{/logout}" >Logout</a></div>
+    <body>
+
+        <nav>
+            <div class="mainNav">
+                <div class="navButtons">
+                    <div class="navButton" style="width:120px"><a href="mainPanel.html" th:href="@{/api/routes/list}" >Routes</a></div>
+                    <div class="navButton"><a href="reports.html" th:href="@{/api/reports}" >Reports</a></div>
+                    <div class="navButton"><a href="cars.html" th:href="@{/api/cars/list}" >Cars</a></div>
+                    <div class="navButton"><a  href="drivers.html" th:href="@{/api/drivers/list}" >Drivers</a></div>
+                    <div class="navButton"><a  href="/logout" th:href="@{/logout}" >Logout</a></div>
+                </div>
+            </div>
+        </nav>
+        <div class="reportsNavTitles">
+            <div id="carReportsNav" class="onClickReport">Cars report</div>
+            <div id="driverReportsNav" class="reportTitle">Drivers report</div>
+            <div id="reportReportsNav" class="reportTitle">Route report</div>
         </div>
-    </div>
-    <div class="reportsNavTitles">
-        <div id="carReportsNav" class="onClickReport">Cars report</div>
-        <div id="driverReportsNav" class="reportTitle">Drivers report</div>
-        <div id="reportReportsNav" class="reportTitle">Route report</div>
-    </div>
-    <div id="carReports" class="mainReports" style="display: block">
+        <div id="carReports" class="mainReports" style="display: block">
 
-        <form action=# th:action="@{/showCarReports}">
-            <select th:name="reportCar">
-                <option th:each="report : ${reportsCarList}"
-                        th:value="${report}"
-                        th:utext="${report.returnValue()}">
+            <form action=# th:action="@{/showCarReports}">
+                <select th:name="reportCar">
+                    <option th:each="report : ${reportsCarList}"
+                            th:value="${report}"
+                            th:utext="${report.returnValue()}">
 
-                </option>
-            </select>
-            <button class="submitButton" type="submit">Show report</button>
-        </form>
-        <div id="listOfElements" class="mainTableDiv" style="padding-top:  30px; clear: both">
-            <table>
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Brand</th>
-                    <th>Model</th>
-                    <th>Vin number</th>
-                    <th>Color</th>
-                    <th>Production year</th>
-                    <th>Distance</th>
-                    <th>Duration</th>
-                    <th>Notes</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="car: ${listOfCars}">
-                    <td  th:text="${car.id}"></td>
-                    <td  th:text="${car.brand}"></td>
-                    <td  th:text="${car.model}"></td>
-                    <td  th:text="${car.vinNumber}"></td>
-                    <td  th:text="${car.color}"></td>
-                    <td  th:text="${car.productionYear}"></td>
-                    <td  th:text="${car.distance}"></td>
-                    <td  th:text="${car.getLocalTimeDuration()}"></td>
-                    <td  th:text="${car.notes}"></td>
-                </tr>
-                </tbody>
-            </table>
+                    </option>
+                </select>
+                <button class="submitButton" type="submit">Show report</button>
+            </form>
+            <div id="listOfElements" class="mainTableDiv" style="padding-top:  30px; clear: both">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Brand</th>
+                        <th>Model</th>
+                        <th>Vin number</th>
+                        <th>Color</th>
+                        <th>Production year</th>
+                        <th>Distance</th>
+                        <th>Duration</th>
+                        <th>Notes</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="car: ${listOfCars}">
+                        <td  th:text="${car.id}"></td>
+                        <td  th:text="${car.brand}"></td>
+                        <td  th:text="${car.model}"></td>
+                        <td  th:text="${car.vinNumber}"></td>
+                        <td  th:text="${car.color}"></td>
+                        <td  th:text="${car.productionYear}"></td>
+                        <td  th:text="${car.distance}"></td>
+                        <td  th:text="${car.getLocalTimeDuration()}"></td>
+                        <td  th:text="${car.notes}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
-    <div id="driversReports" class="mainReports" >
+        <div id="driversReports" class="mainReports" >
 
-        <form action=# th:action="@{/showDriverReports}">
-            <select th:name="reportDriver">
-                <option th:each="report : ${reportsDriverList}"
-                        th:value="${report}"
-                        th:utext="${report.returnValue()}">
+            <form action=# th:action="@{/showDriverReports}">
+                <select th:name="reportDriver">
+                    <option th:each="report : ${reportsDriverList}"
+                            th:value="${report}"
+                            th:utext="${report.returnValue()}">
 
-                </option>
-            </select>
-            <button  class="submitButton" type="submit">Show report</button>
-        </form>
-        <div id="listOfElements1" class="mainTableDiv" style="padding-top:  30px; clear: both">
-            <table>
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>First name</th>
-                    <th>Last name</th>
-                    <th>Licence</th>
-                    <th>Distance</th>
-                    <th>Time on the road</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="driver: ${listOfDrivers}">
-                    <td  th:text="${driver.id}"></td>
-                    <td  th:text="${driver.firtsName}"></td>
-                    <td  th:text="${driver.lastName}"></td>
-                    <td  th:text="${driver.licence}"> </td>
-                    <td  th:text="${driver.distance}"> </td>
-                    <td  th:text="${driver.getLocalTimeDuration()}"> </td>
-                </tr>
-                </tbody>
-            </table>
+                    </option>
+                </select>
+                <button  class="submitButton" type="submit">Show report</button>
+            </form>
+            <div id="listOfElements1" class="mainTableDiv" style="padding-top:  30px; clear: both">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>First name</th>
+                        <th>Last name</th>
+                        <th>Licence</th>
+                        <th>Distance</th>
+                        <th>Time on the road</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="driver: ${listOfDrivers}">
+                        <td  th:text="${driver.id}"></td>
+                        <td  th:text="${driver.firtsName}"></td>
+                        <td  th:text="${driver.lastName}"></td>
+                        <td  th:text="${driver.licence}"> </td>
+                        <td  th:text="${driver.distance}"> </td>
+                        <td  th:text="${driver.getLocalTimeDuration()}"> </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
-    <div id="routeReports" class="mainReports" >
+        <div id="routeReports" class="mainReports" >
 
-        <form action=# th:action="@{/showRouteReports}">
-            <select th:name="reportRoute">
-                <option th:each="report : ${reportsRouteList}"
-                        th:value="${report}"
-                        th:utext="${report.returnValue()}">
+            <form action=# th:action="@{/showRouteReports}">
+                <select th:name="reportRoute">
+                    <option th:each="report : ${reportsRouteList}"
+                            th:value="${report}"
+                            th:utext="${report.returnValue()}">
 
-                </option>
-            </select>
-            <button class="submitButton" type="submit">Show report</button>
-        </form>
-        <div id="listOfElements2" class="mainTableDiv" style="padding-top:  30px; clear: both" >
-            <table>
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Departure time</th>
-                    <th>Arrival time</th>
-                    <th>Departure from</th>
-                    <th>Arrival to</th>
-                    <th>Car</th>
-                    <th>Driver</th>
-                    <th>Distance</th>
-                    <th>Duration</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="route: ${listOfRoutes}">
-                    <td  th:text="${route.id}"></td>
-                    <td  th:text="${route.routeName}"></td>
-                    <td  th:text="${route.departureDate}"></td>
-                    <td  th:text="${route.arrivalDate}"></td>
-                    <td  th:text="${route.departureAddress}"></td>
-                    <td  th:text="${route.destinationAddress}"></td>
-                    <td  th:text="${route?.car?.returnShortDetails()}"></td>
-                    <td  th:text="${route?.driver?.returnShortDetails()}"></td>
-                    <td  th:text="${route.distance}"></td>
-                    <td  th:text="${route.getLocalTimeDuration()}"></td>
-                </tr>
-                </tbody>
-            </table>
+                    </option>
+                </select>
+                <button class="submitButton" type="submit">Show report</button>
+            </form>
+            <div id="listOfElements2" class="mainTableDiv" style="padding-top:  30px; clear: both" >
+                <table>
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Departure time</th>
+                        <th>Arrival time</th>
+                        <th>Departure from</th>
+                        <th>Arrival to</th>
+                        <th>Car</th>
+                        <th>Driver</th>
+                        <th>Distance</th>
+                        <th>Duration</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="route: ${listOfRoutes}">
+                        <td  th:text="${route.id}"></td>
+                        <td  th:text="${route.routeName}"></td>
+                        <td  th:text="${route.departureDate}"></td>
+                        <td  th:text="${route.arrivalDate}"></td>
+                        <td  th:text="${route.departureAddress}"></td>
+                        <td  th:text="${route.destinationAddress}"></td>
+                        <td  th:text="${route?.car?.returnShortDetails()}"></td>
+                        <td  th:text="${route?.driver?.returnShortDetails()}"></td>
+                        <td  th:text="${route.distance}"></td>
+                        <td  th:text="${route.getLocalTimeDuration()}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
-</nav>
-</body>
-</body>
+        <div id="sideBar">
+            <div class="addNewButton"><i class="icon-cab fontelloAddNew"></i>&nbsp;&nbsp;<a href="addCar.html" th:href="@{/api/cars/add-car}" >ADD NEW CAR</a></div>
+            <div class="addNewButton"><i class="icon-user-plus fontelloAddNew"></i>&nbsp;&nbsp;<a href="addDriver.html" th:href="@{/api/drivers/add-driver}">ADD NEW DRIVER</a></div>
+            <div class="addNewButton"><i class="icon-plus-circled fontelloAddNew"></i>&nbsp;&nbsp;<a href="addRoute.html" th:href="@{/api/route/add-route}" >ADD NEW ROUTE</a></div>
+        </div>
+        <script async src="reports.js"></script>
+        <script async src="table-script.js"></script>
+    </body>
 </html>

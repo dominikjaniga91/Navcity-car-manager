@@ -35,4 +35,5 @@ public class NavcityTrialApplication {
     PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
+
 }

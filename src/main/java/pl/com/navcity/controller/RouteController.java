@@ -1,5 +1,6 @@
 package pl.com.navcity.controller;
 
+import org.springframework.web.bind.annotation.RequestMapping;
 import pl.com.navcity.model.Car;
 import pl.com.navcity.model.Color;
 import pl.com.navcity.model.Driver;
@@ -19,6 +20,7 @@ import pl.com.navcity.service.RouteServiceImpl;
 import javax.validation.Valid;
 
 @Controller
+@RequestMapping("/api/routes")
 public class RouteController {
 
     @Autowired
@@ -30,13 +32,13 @@ public class RouteController {
     @Autowired
     RouteServiceImpl routeService;
 
-    @GetMapping(path ="/routes")
+    @GetMapping(path ="/list")
     public String showMenu(Model model){
         model.addAttribute("listOfRoutes", routeService.getAllRoutes());
         return "mainPanel";
     }
 
-    @GetMapping(path="/addRouteForm")
+    @GetMapping(path="/route-form")
     public String prepareAddNewRouteForm(@RequestParam(value = "routeId", required = false) Integer routeId, Model model){
 
         model.addAttribute("listOfCars", carDao.findAll());
@@ -57,7 +59,7 @@ public class RouteController {
         return "addRoute";
     }
 
-    @PostMapping(path="/addRoute")
+    @PostMapping(path="/add-route")
     public String addNewRoute(@Valid Route newRoute,
                               BindingResult bindingResult,
                               @RequestParam(value = "routeId", required = false) Integer routeId,
@@ -89,14 +91,14 @@ public class RouteController {
             newDriver.updateRouteDurationAndDistance(newDriver, newRoute, oldRoute);
             routeService.updateRoute(newRoute, oldRoute);
         }
-        return "redirect:/";
+        return "redirect:/api/routes/list";
     }
 
 
-    @GetMapping(path="/deleteRoute")
+    @GetMapping(path="/delete-route")
     public String deleteCarFromDatabase(@RequestParam("routeId") Integer routeId){
 
        routeService.deleteRouteById(routeId);
-       return "redirect:/";
+       return "redirect:/api/routes/list";
     }
 }

@@ -14,7 +14,6 @@
     width: 700px;
     height: 290px;
     padding-top: 30px;
-    font-family: 'Poppins';
     margin-left: auto;
     margin-right: auto;
     display: block;
@@ -25,7 +24,6 @@
     width: 700px;
     height: 240px;
     padding-top: 30px;
-    font-family: 'Poppins';
     margin-left: auto;
     margin-right: auto;
     display: block;
@@ -52,7 +50,6 @@
     background: none;
     border: none;
     border-bottom:solid 1px;
-    font-family: 'Poppins';
     width: 300px;
     padding: 5px 0 0 0;
 }
@@ -69,7 +66,6 @@
 }
 
 .submitButton{
-    font-family: 'Poppins';
     background-color: #00ffff;
     border: none;
     width: 135px;
@@ -149,6 +145,6 @@ select > option{
     border: none;
     border-radius: 0px 0px 5px 5px;
     padding-left: 5px;
-    background-color: #ff3333;
+    background-color: #ffb3b3;
 }
 

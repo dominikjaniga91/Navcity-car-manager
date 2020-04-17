@@ -1,19 +1,21 @@
 package pl.com.navcity.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
+import org.springframework.social.security.SpringSocialConfigurer;
 import pl.com.navcity.service.UserDetailsServiceImpl;
-import pl.com.navcity.service.UserService;
+
 
 @Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+
     private UserDetailsServiceImpl userDetailsService;
 
-
+    @Autowired
     public WebSecurityConfig(UserDetailsServiceImpl userDetailsService) {
         this.userDetailsService = userDetailsService;
     }
@@ -27,23 +29,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
-                .antMatchers("/").hasAnyRole("DRIVER", "ADMIN", "MANAGER")
-                .antMatchers("/routes").permitAll()
-                .antMatchers("/cars/**").permitAll()
-                .antMatchers("/reports/**").hasRole("MANAGER")
-                .antMatchers("/drivers/**").hasRole("DRIVER")
-                .antMatchers("/showReportsPage").hasRole("DRIVER")
-                .and()
-                .authorizeRequests().antMatchers("/h2-console/**").permitAll()
+                .antMatchers("/","/api").hasAnyRole("DRIVER", "ADMIN", "MANAGER")
+                .antMatchers("/api/routes/**").permitAll()
+                .antMatchers("/api/cars/**").permitAll()
+                .antMatchers("/api/reports/**").hasRole("MANAGER")
                 .and()
                 .formLogin()
                     .loginPage("/login-form")
                     .loginProcessingUrl("/authenticateTheUser")
-                    .defaultSuccessUrl("/routes", true)
+                    .defaultSuccessUrl("/api/routes/list")
                     .permitAll()
                 .and()
-                .logout().permitAll();
-
+                .logout()
+                    .invalidateHttpSession(true)
+                    .clearAuthentication(true)
+                    .logoutUrl("/logout")
+                    .logoutSuccessUrl("/login-form?logout")
+                    .permitAll();
         http.csrf().disable();
         http.headers().frameOptions().disable();
     }

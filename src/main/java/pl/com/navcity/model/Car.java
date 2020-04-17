@@ -17,12 +17,12 @@ public class Car {
 
     @NotEmpty(message = "{validation.empty}")
     @NotBlank(message = "{validation.blank}")
-    @Column(name="brand", length = 45)
+    @Column(name="brand")
     private String brand;
 
     @NotEmpty(message = "{validation.empty}")
     @NotBlank(message = "{validation.blank}")
-    @Column(name="model", length = 45)
+    @Column(name="model")
     private String model;
 
     @NotEmpty(message = "{validation.empty}")

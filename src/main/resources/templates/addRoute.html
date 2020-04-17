@@ -19,7 +19,7 @@
     
       <div class="routeMainContainer">
         <div class="addFormContainer" style="float:left; ">
-              <form  class="mainAddForm" action=# th:action="@{/addRoute}" th:object="${route}"  style="margin-top:30px;" method="POST">
+              <form  class="mainAddForm" action="/api/routes/add-route" th:action="@{/api/routes/add-route}" th:object="${route}"  style="margin-top:30px;" method="POST">
                 <input type="hidden" th:field="*{id}">
                 <input type="hidden" th:name="routeId" th:value="*{id}">
                 <input type="hidden" id="distance" th:field="*{distance}">

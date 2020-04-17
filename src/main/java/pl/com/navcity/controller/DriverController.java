@@ -1,5 +1,6 @@
 package pl.com.navcity.controller;
 
+import org.springframework.web.bind.annotation.RequestMapping;
 import pl.com.navcity.model.Driver;
 import pl.com.navcity.model.Route;
 import pl.com.navcity.service.DriverServiceImpl;
@@ -15,23 +16,26 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.validation.Valid;
 
 @Controller
+@RequestMapping("/api/drivers")
 public class DriverController {
 
+    private DriverServiceImpl driverService;
+    private RouteServiceImpl routeService;
 
     @Autowired
-    DriverServiceImpl driverService;
+    public DriverController(DriverServiceImpl driverService, RouteServiceImpl routeService) {
+        this.driverService = driverService;
+        this.routeService = routeService;
+    }
 
-    @Autowired
-    RouteServiceImpl routeService;
-
-    @GetMapping("/driversList")
+    @GetMapping("/list")
     public String showCarList(Model model){
 
         model.addAttribute("listOfDrivers", driverService.getAllDrivers());
         return "drivers";
     }
 
-    @GetMapping(path="/addDriverForm")
+    @GetMapping(path="/driver-form")
     public String prepareAddDriverForm(@RequestParam(value = "driverId", required = false) Integer driverId, Model model){
 
         if(driverId != null){
@@ -46,7 +50,7 @@ public class DriverController {
 
     }
 
-    @PostMapping("/addDriver")
+    @PostMapping("/add-driver")
     public String createOrUpdateCar(@Valid Driver driver, BindingResult bindingResult, Model model){
 
         if(bindingResult.hasErrors()){
@@ -59,7 +63,7 @@ public class DriverController {
         return "mainPanel";
     }
 
-    @PostMapping("/updateDriver")
+    @PostMapping("/update-driver")
     public String  updateCar(@Valid Driver driver,
                              BindingResult bindingResult,
                              @RequestParam("driverId") Integer driverId){
@@ -69,15 +73,15 @@ public class DriverController {
         }
 
         driverService.updateDriver(driverId, driver);
-        return "redirect:/driversList";
+        return "redirect:/api/drivers/list";
     }
 
-    @GetMapping(path="/deleteDriver")
+    @GetMapping(path="/delete-driver")
     public String deleteCarFromDatabase(@RequestParam("driverId") Integer driverId){
 
         driverService.deleteDriverById(driverId);
 
-        return "redirect:/driversList";
+        return "redirect:/api/drivers/list";
     }
 
 }

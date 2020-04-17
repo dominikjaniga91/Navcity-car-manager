@@ -35,7 +35,6 @@ body {
     position: absolute;
     right: 20px;
     bottom: 5px;
-    /* transform: translateX(-50%); */
 }
 .navButton{
     margin-right:20px;
@@ -67,7 +66,6 @@ body {
 }
 
 .mainTableDiv  table{
-    font-family: 'Roboto';
     font-weight: 300;
     font-size: 13px;
     border-collapse: collapse;

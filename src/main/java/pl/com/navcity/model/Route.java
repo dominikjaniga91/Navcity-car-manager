@@ -21,7 +21,7 @@ public class Route {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name="route_name", length = 225)
+    @Column(name="route_name")
     @NotEmpty(message = "{validation.empty}")
     @NotBlank(message = "{validation.blank}")
     private String routeName =" gsdg";
@@ -34,7 +34,7 @@ public class Route {
     private LocalDateTime departureDate;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
-    @Column(name="arrivalDate")
+    @Column(name="arrival_date")
     @NotNull(message = "{validation.empty}")
     private LocalDateTime arrivalDate;
 

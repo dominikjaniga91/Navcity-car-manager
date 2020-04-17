@@ -3,6 +3,7 @@ package pl.com.navcity.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import pl.com.navcity.model.reports.DriverReports;
 import pl.com.navcity.model.reports.CarReports;
@@ -10,9 +11,10 @@ import pl.com.navcity.model.reports.RouteReports;
 
 
 @Controller
+@RequestMapping("/api")
 public class ReportsController {
 
-    @GetMapping(path="/showReportsPage")
+    @GetMapping(path="/reports")
     public String showReports(Model model){
         model.addAttribute("reportsCarList", CarReports.values());
         model.addAttribute("reportsDriverList", DriverReports.values());
@@ -22,7 +24,7 @@ public class ReportsController {
 
 
 
-    @GetMapping(path="/showCarReports")
+    @GetMapping(path="/car-reports")
     public String selectRaport(@RequestParam("reportCar") String reportCar,Model model){
         model.addAttribute("reportsCarList", CarReports.values());
         model.addAttribute("reportsDriverList", DriverReports.values());
@@ -31,7 +33,7 @@ public class ReportsController {
         return "reports";
     }
 
-    @GetMapping(path="/showDriverReports")
+    @GetMapping(path="/driver-reports")
     public String selectDriverRaport(@RequestParam("reportDriver") String reportDriver,Model model){
         model.addAttribute("reportsCarList", CarReports.values());
         model.addAttribute("reportsDriverList", DriverReports.values());
@@ -40,7 +42,7 @@ public class ReportsController {
         return "reports";
     }
 
-    @GetMapping(path="/showRouteReports")
+    @GetMapping(path="/route-reports")
     public String selectRouteRaport(@RequestParam("reportRoute") String reportRoute,Model model){
         model.addAttribute("reportsCarList", CarReports.values());
         model.addAttribute("reportsDriverList", DriverReports.values());

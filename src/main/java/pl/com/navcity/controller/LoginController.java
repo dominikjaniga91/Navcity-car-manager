@@ -15,4 +15,10 @@ public class LoginController {
         model.addAttribute("user", new User());
         return "login";
     }
+
+    @GetMapping("/")
+    public String returnDefaultPage(){
+
+        return "redirect:/api/routes/list";
+    }
 }
