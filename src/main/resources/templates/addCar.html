@@ -26,7 +26,8 @@
             <div class="errorDiv"><p th:if="${#fields.hasErrors('color')}" th:errors="*{color}"></p></div>
             <input type="number" class="inputForm" th:field="*{productionYear}" placeholder="Production year" pattern="^[0-9]+4" required><br/>
             <div class="errorDiv"><p th:if="${#fields.hasErrors('productionYear')}" th:errors="*{productionYear}"></p></div><br/>
-            <textarea rows="2" class="inputTextArea inputForm" th:field="*{notes}" placeholder="Notes" ></textarea><br><br>
+            <textarea rows="3" class="inputTextArea inputForm" th:field="*{notes}" placeholder="Notes" ></textarea>
+            <br><br>
             <div class="submitButton centerDivButton" onclick="window.history.back();">Cancel</div>
             <button class="submitButton" type="submit">Save car</button>
         </form>

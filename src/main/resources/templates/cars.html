@@ -11,9 +11,10 @@
     <title>Navcity - cars</title>
   </head>
   <body>
-  <script async src="script.js"></script>
+
     <nav>
       <div class="mainNav">
+          <div class="logo">Navcity</div>
           <div class="navButtons">
               <div class="navButton" style="width:120px"><a href="mainPanel.html" th:href="@{/api/routes/list}" >Routes</a></div>
               <div class="navButton"><a href="reports.html" th:href="@{/api/reports}" >Reports</a></div>
@@ -52,10 +53,10 @@
                     <td  th:text="${car.getLocalTimeDuration()}"></td>
                     <td  th:text="${car.notes}"></td>
                     <td>
-                        <a th:href="@{/deleteCar(carId=${car.id})}">
+                        <a th:href="@{/api/cars/delete-car(carId=${car.id})}">
                             <i class="icon-trash-2 fontelloIcon"  ></i>
                         </a>
-                        <a th:href="@{/addCarForm(carId=${car.id})}">
+                        <a th:href="@{/api/cars/car-form(carId=${car.id})}">
                             <i class="icon-cog-1 fontelloIcon"></i>
                         </a>
                     </td>
@@ -64,12 +65,12 @@
             </table>
         </div>
         <div id="sideBar">
-            <div class="addNewButton"><i class="icon-cab fontelloAddNew"></i>&nbsp;&nbsp;<a href="addCar.html" th:href="@{/api/cars/add-car}" >ADD NEW CAR</a></div>
-            <div class="addNewButton"><i class="icon-user-plus fontelloAddNew"></i>&nbsp;&nbsp;<a href="addDriver.html" th:href="@{/api/drivers/add-driver}">ADD NEW DRIVER</a></div>
-            <div class="addNewButton"><i class="icon-plus-circled fontelloAddNew"></i>&nbsp;&nbsp;<a href="addRoute.html" th:href="@{/api/route/add-route}" >ADD NEW ROUTE</a></div>
+            <div class="addNewButton"><i class="icon-cab fontelloAddNew"></i>&nbsp;&nbsp;<a href="addCar.html" th:href="@{/api/cars/car-form}" >ADD NEW CAR</a></div>
+            <div class="addNewButton"><i class="icon-user-plus fontelloAddNew"></i>&nbsp;&nbsp;<a href="addDriver.html" th:href="@{/api/drivers/driver-form}">ADD NEW DRIVER</a></div>
+            <div class="addNewButton"><i class="icon-plus-circled fontelloAddNew"></i>&nbsp;&nbsp;<a href="addRoute.html" th:href="@{/api/routes/route-form}" >ADD NEW ROUTE</a></div>
         </div>
     </main>
-    
+    <script async src="/script.js"></script>
       
   </body>
 </html>

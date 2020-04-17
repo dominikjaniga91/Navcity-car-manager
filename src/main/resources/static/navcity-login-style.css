@@ -38,12 +38,6 @@ body{
     background-repeat: no-repeat;
 }
 
-#navcity-logo{
-
-
-    width: 1fr;
-    height: auto;
-}
 .login{
 
     background-color: #262626;
@@ -54,21 +48,22 @@ body{
     right: 0px;
 }
 
-.login__container{
+.loginContainer{
 
     margin-top: 10%;
     margin-left: auto;
     margin-right: auto;
-    width: 50%;
+    width: 70%;
+    max-width: 370px;
     height: 66% ;
     position: relative;
 }
-.hide__form{
+.hideForm{
 
     display: none;
 }
 
-.signup__form{
+.signupForm{
 
   
     width: 100%;
@@ -80,7 +75,7 @@ body{
     animation: appear 1s ease;
 }   
 
-.login__form{
+.loginForm{
 
   
     width: 100%;
@@ -199,7 +194,7 @@ h3 > span {
     color: white;
 }
 
-#navcity__header{
+#navcityHeader{
 
     position: absolute;
     top: 9.2vw;
@@ -209,7 +204,7 @@ h3 > span {
     width: 300px;
 }
 
-#navcity__name{
+#navcityName{
     font-size: 3.4vw;
     font-weight: 700;
     letter-spacing: 1px;
@@ -217,7 +212,7 @@ h3 > span {
     text-align: center;
 }
 
-#navcity__header > p {
+#navcityHeader > p {
     width: 300px;
     margin: 0;
     color: black;
@@ -233,7 +228,13 @@ h3 > span {
     
 }
 
-#social__icons{
+#socialIcons{
     text-align: center;
     margin-top: 6.4vw;
+}
+
+select > option{
+    color: white;
+    background-color: #262626;
+    border: none;
 }

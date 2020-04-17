@@ -24,7 +24,7 @@ public class Route {
     @Column(name="route_name")
     @NotEmpty(message = "{validation.empty}")
     @NotBlank(message = "{validation.blank}")
-    private String routeName =" gsdg";
+    private String routeName;
 
 
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")

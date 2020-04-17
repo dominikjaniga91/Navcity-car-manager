@@ -4,16 +4,17 @@ public enum Authorities {
 
     ROLE_DRIVER("Driver"),
     ROLE_ADMIN("Admin"),
-    ROLE_MANAGER("Manager"),
-    ROLE_USER("User");
+    ROLE_MANAGER("Manager");
 
-    String value;
+    final String value;
 
     Authorities(String value) {
         this.value = value;
     }
 
-    String getName(){
+    public String getName(){
         return value;
     }
 }
+
+

@@ -11,39 +11,58 @@
 <body>
 
 <main>
-  <h1 id="navcity__header">
+  <h1 id="navcityHeader">
     <p>Welcome to</p>
-    <p id="navcity__name" >Navcity</p>
+    <p id="navcityName" >Navcity</p>
   </h1>
   <div class="login">
 
-    <div class="login__container">
-      <div id="signup__id" class="hide__form">
+    <div class="loginContainer">
+      <div id="signupId" class="hideForm">
 
         <form action="/api/users/add-user" th:action="@{/api/users/add-user}" th:object="${user}" class="mainAddForm" method="POST">
-          <input type="text" class="inputForm" th:field="*{username}" placeholder="Email"  required><br/>
-          <div class="errorDiv"><p th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p></div>
+          <input type="text" class="inputForm" th:field="*{username}" placeholder="Email"
+                 pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                 title="characters@characters.domain"
+                 required><br/>
+          <div class="errorDiv">
+            <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
+          </div>
           <input type="text" class="inputForm" th:field="*{firstName}" placeholder="First name"  required><br/>
-          <div class="errorDiv"><p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></p></div>
+          <div class="errorDiv">
+            <p th:if="${#fields.hasErrors('firstName')}"
+               th:errors="*{firstName}"></p>
+          </div>
           <input type="text" class="inputForm" th:field="*{lastName}" placeholder="Last name" required><br/>
-          <div class="errorDiv"><p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></p></div>
-          <input type="password" class="inputForm" th:field="*{password}" placeholder="Password"required><br/>
-          <div class="errorDiv"><p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p></div><br/>
+          <div class="errorDiv">
+            <p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></p>
+          </div>
+          <input type="password" class="inputForm" th:field="*{password}"
+                 pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"
+                  title="Requirements: lower letter,
+                          upper letter, number,
+                          min 8 characters"
+                 placeholder="Password"required><br/>
+          <div class="errorDiv">
+            <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
+          </div><br/>
           <select class="inputForm" th:field="*{authority}" required>
             <option selected disabled value=""></option>>
-            <option th:each="authority: ${authorities}"
-                    th:value="${authority}"
-                    th:utext="${authority}" >
+            <option th:each="role: ${authorities}"
+                    th:value="${role}"
+                    th:text="${role.getName()}" >
             </option>
           </select><br/>
-          <div class="errorDiv"><p th:if="${#fields.hasErrors('authority')}" th:errors="*{authority}"></p></div>
+          <div class="errorDiv">
+            <p th:if="${#fields.hasErrors('authority')}" th:errors="*{authority}"></p>
+          </div>
           <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
           <button class="submitButton" type="submit">Create account</button>
         </form>
       </div>
-      <div id="login__id" class="login__form">
-        <h2 id="signup__header">Login to your account </h2>
-        <h3 id="signup__inner">Don't have an account? <span id="show__signup">Sing up free</span> </h3>
+      <div id="loginId" class="loginForm">
+        <h2 id="signupHeader">Login to your account </h2>
+        <h3 id="signupInner">Don't have an account? <span id="showSignup">Sing up free</span> </h3>
         <form action="/authenticateTheUser" th:action="@{/authenticateTheUser}" class="mainAddForm" method="POST">
           <span th:if="${param.error}">
               <div class="errorDiv">

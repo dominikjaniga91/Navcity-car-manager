@@ -78,6 +78,7 @@ body {
 }
 
 .submitButton{
+    margin-top: 10px;
     background-color: #00ffff;
     border: none;
     width: 135px;

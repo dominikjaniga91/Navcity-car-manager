@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300&display=swap" rel="stylesheet">
 </head>
 <body>
-    <script async src="table-script.js"></script>
+
     <div class="carDriverFormContainer">
         <form action="addCar" th:action="@{/updateCar}" th:object="${car}" class="mainUpdateForm" method="POST">
             <input type="hidden" th:name="carId" th:value="*{id}">
@@ -71,5 +71,5 @@
             </tbody>
         </table>
     </div>
-    
+    <script async src="/table-script.js"></script>
 </body>

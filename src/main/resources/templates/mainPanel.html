@@ -9,9 +9,10 @@
     <title>NAvcity - routes</title>
   </head>
   <body>
-  <script async src="script.js"></script>
+
     <nav>
       <div class="mainNav">
+        <div class="logo">Navcity</div>
         <div class="navButtons">
             <div class="navButton" style="width:120px"><a href="mainPanel.html" th:href="@{/api/routes/list}" >Routes</a></div>
             <div class="navButton"><a href="reports.html" th:href="@{/api/reports}" >Reports</a></div>
@@ -22,8 +23,6 @@
       </div>
     </nav>
     <main>
-        <h1>Welcome, <span sec:authentication="name">Username</span></h1>
-        <p sec:authentication="authorities">User authorities</p>
         <div id="addSomeRoutes"> There's no route, add some using side panel</div>
         <div id="listOfElements" class="mainTableDiv" style="float: left">
             <table>
@@ -55,10 +54,10 @@
                         <td  th:text="${route.distance}"></td>
                         <td  th:text="${route.getLocalTimeDuration()}"></td>
                         <td>
-                            <a th:href="@{/deleteRoute(routeId=${route.id})}">
+                            <a th:href="@{/api/routes/delete-route(routeId=${route.id})}">
                                 <i class="icon-trash-2 fontelloIcon"></i>
                             </a>
-                            <a th:href="@{/addRouteForm(routeId=${route.id})}">
+                            <a th:href="@{/api/routes/route-form(routeId=${route.id})}">
                                 <i class="icon-cog-1 fontelloIcon"></i>
                             </a>
                         </td>
@@ -68,12 +67,12 @@
             </table>
         </div>
         <div id="sideBar">
-            <div class="addNewButton"><i class="icon-cab fontelloAddNew"></i>&nbsp;&nbsp;<a href="addCar.html" th:href="@{/api/cars/add-car}" >ADD NEW CAR</a></div>
-            <div class="addNewButton"><i class="icon-user-plus fontelloAddNew"></i>&nbsp;&nbsp;<a href="addDriver.html" th:href="@{/api/drivers/add-driver}">ADD NEW DRIVER</a></div>
-            <div class="addNewButton"><i class="icon-plus-circled fontelloAddNew"></i>&nbsp;&nbsp;<a href="addRoute.html" th:href="@{/api/route/add-route}" >ADD NEW ROUTE</a></div>
+            <div class="addNewButton"><i class="icon-cab fontelloAddNew"></i>&nbsp;&nbsp;<a href="addCar.html" th:href="@{/api/cars/car-form}" >ADD NEW CAR</a></div>
+            <div class="addNewButton"><i class="icon-user-plus fontelloAddNew"></i>&nbsp;&nbsp;<a href="addDriver.html" th:href="@{/api/drivers/driver-form}">ADD NEW DRIVER</a></div>
+            <div class="addNewButton"><i class="icon-plus-circled fontelloAddNew"></i>&nbsp;&nbsp;<a href="addRoute.html" th:href="@{/api/routes/route-form}" >ADD NEW ROUTE</a></div>
         </div>
     </main>
-    
-      
+    <script async src="/script.js"></script>
+
   </body>
 </html>

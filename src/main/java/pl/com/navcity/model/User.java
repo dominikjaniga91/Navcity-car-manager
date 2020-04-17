@@ -5,6 +5,8 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -15,9 +17,13 @@ public class User implements UserDetails {
     @Column(name="username", length = 100)
     private String username;
 
+    @NotEmpty(message = "{user.empty}")
+    @NotBlank(message = "{user.blank}")
     @Column(name="firstName", length = 50)
     private String firstName;
 
+    @NotEmpty(message = "{user.empty}")
+    @NotBlank(message = "{user.blank}")
     @Column(name="lastName", length = 50)
     private String lastName;
 
@@ -79,7 +85,7 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singleton(new SimpleGrantedAuthority(authority.getName()));
+        return Collections.singleton(new SimpleGrantedAuthority(authority.toString()));
     }
 
     @Override

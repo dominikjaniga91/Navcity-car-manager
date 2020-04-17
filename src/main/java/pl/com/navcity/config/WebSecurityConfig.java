@@ -29,10 +29,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
-                .antMatchers("/","/api").hasAnyRole("DRIVER", "ADMIN", "MANAGER")
-                .antMatchers("/api/routes/**").permitAll()
-                .antMatchers("/api/cars/**").permitAll()
                 .antMatchers("/api/reports/**").hasRole("MANAGER")
+                .antMatchers("/api/routes/**", "/api/drivers/**", "/api/cars/**")
+                    .hasAnyRole("MANAGER", "ADMIN", "DRIVER")
+                .antMatchers("/**", "/login-form").permitAll()
+                .anyRequest().authenticated()
                 .and()
                 .formLogin()
                     .loginPage("/login-form")
@@ -45,7 +46,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .clearAuthentication(true)
                     .logoutUrl("/logout")
                     .logoutSuccessUrl("/login-form?logout")
-                    .permitAll();
+                    .permitAll()
+                .and()
+                    .exceptionHandling()
+                    .accessDeniedPage("/access-denied");
+
         http.csrf().disable();
         http.headers().frameOptions().disable();
     }

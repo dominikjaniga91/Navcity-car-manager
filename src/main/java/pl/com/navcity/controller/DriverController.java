@@ -55,12 +55,10 @@ public class DriverController {
 
         if(bindingResult.hasErrors()){
 
-            model.addAttribute("validation", "data is invalid");
-            System.out.println("data is invalid");
             return "addCar";
         }
         driverService.saveDriver(driver);
-        return "mainPanel";
+        return "redirect:/api/drivers/list";
     }
 
     @PostMapping("/update-driver")

@@ -173,3 +173,55 @@ body {
     background-color: #262626;
 
 }
+
+#accessDenied {
+    width: 50%;
+    height: 200px;
+    margin-top: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    color: white;
+    font-size: 30px;
+    text-align: center;
+    opacity: 0.8;
+    background-color: #262626;
+}
+
+#accessDenied > p{
+
+    text-align: center;
+    padding-top: 75px;
+}
+
+.deniedButton{
+    background-color: #00ffff;
+    border: none;
+    width: 135px;
+    height: 40px;
+    display: block;
+    font-size: 15px;
+    margin-left: auto;
+    color: black;
+    margin-right: auto;
+    margin-top: 20px;
+}
+
+.deniedButton:hover{
+    cursor: pointer;
+    background-color: #00cccc;
+    color: white;
+}
+
+.centerDivButton{
+
+    text-align: center;
+    line-height: 40px;
+}
+
+.logo{
+    position: absolute;
+    line-height: 60px;
+    left: 20px;
+    font-size: 37px;
+    color: #00cccc;
+}

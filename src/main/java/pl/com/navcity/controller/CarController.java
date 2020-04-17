@@ -55,9 +55,6 @@ public class CarController {
     public String createCar(@Valid Car car, BindingResult bindingResult, Model model){
 
         if(bindingResult.hasErrors()){
-
-           model.addAttribute("validation", "data is invalid");
-           System.out.println("data is invalid");
            return "addCar";
        }
 
