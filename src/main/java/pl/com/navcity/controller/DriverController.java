@@ -75,8 +75,14 @@ public class DriverController {
     }
 
     @GetMapping(path="/delete-driver")
-    public String deleteCarFromDatabase(@RequestParam("driverId") Integer driverId){
+    public String deleteCarFromDatabase(@RequestParam("driverId") Integer driverId, Model model){
+        Driver driver = driverService.getDriverById(driverId);
 
+        if(!driver.getRouteList().isEmpty()){
+            model.addAttribute("listOfDrivers", driverService.getAllDrivers());
+            model.addAttribute("deleteDriverError", "cannot delete driver");
+            return "drivers";
+        }
         driverService.deleteDriverById(driverId);
 
         return "redirect:/api/drivers/list";

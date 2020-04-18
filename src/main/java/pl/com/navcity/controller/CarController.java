@@ -80,7 +80,15 @@ public class CarController {
    }
 
    @GetMapping(path="/delete-car")
-    public String deleteCarFromDatabase(@RequestParam("carId") Integer carId){
+    public String deleteCarFromDatabase(@RequestParam("carId") Integer carId, Model model){
+
+        Car car = carService.getCarById(carId);
+        if(!car.getRouteList().isEmpty()){
+            model.addAttribute("listOfCars", carService.getAllCars());
+            model.addAttribute("deleteCarError", "cannot delete car");
+
+            return "cars";
+        }
 
         carService.deleteCarById(carId);
         return "redirect:/api/cars/list";

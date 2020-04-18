@@ -25,6 +25,7 @@
       </div>
     </nav>
     <main>
+        <div class="deleteError" th:if="${deleteDriverError != null}" th:text="${deleteDriverError}"> </div>
         <div class="mainTableDiv">
             <table>
                 <thead>

@@ -11,7 +11,7 @@ public class DriverNotFoundAdvice {
 
     @ExceptionHandler(DriverNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public String getBookNotFoundHandler(DriverNotFoundException ex){
+    public String getDriverNotFoundHandler(DriverNotFoundException ex){
 
         return ex.getMessage();
     }
