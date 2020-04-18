@@ -70,6 +70,18 @@ public class Route {
         this.destinationAddress = destinationAddress;
     }
 
+    public Route(String routeName, LocalDateTime departureDate, LocalDateTime arrivalDate, String departureAddress, String destinationAddress, double distance, double duration) {
+        this.routeName = routeName;
+        this.departureDate = departureDate;
+        this.arrivalDate = arrivalDate;
+        this.departureAddress = departureAddress;
+        this.destinationAddress = destinationAddress;
+        this.distance = distance;
+        this.duration = duration;
+    }
+
+
+
     public Route() {
     }
 

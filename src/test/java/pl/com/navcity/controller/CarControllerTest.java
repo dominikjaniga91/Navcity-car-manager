@@ -24,6 +24,9 @@ import pl.com.navcity.service.RouteServiceImpl;
 import pl.com.navcity.service.UserDetailsServiceImpl;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Arrays;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -48,12 +51,30 @@ public class CarControllerTest {
     @MockBean
     UserDetailsServiceImpl userDetailsService;
 
+    Route oldRoute;
+    Route newRoute;
+    Car car;
+
+    @BeforeEach
+    void setUp(){
+        car = new Car(1, "Porsche", "Panamera", "5443123221234", Color.Black, 2011, null);
+        oldRoute =  new Route("Zakopianka",
+                LocalDateTime.of(LocalDate.of(2020, 5,5), LocalTime.of(10,0,0)),
+                LocalDateTime.of(LocalDate.of(2020, 5,5), LocalTime.of(12,0,0)),
+                "Kraków", "Zakopane", 145.67, 123535);
+
+        newRoute =  new Route("Zakopianka",
+                LocalDateTime.of(LocalDate.of(2020, 5,5), LocalTime.of(10,0,0)),
+                LocalDateTime.of(LocalDate.of(2020, 5,5), LocalTime.of(12,0,0)),
+                "Kraków", "Zakopane", 105.67, 123456);
+
+    }
+
 
     @Test
     @WithMockUser(username = "Dominik", roles = {"ADMIN", "MANAGER"})
     void resultShouldMatchCar_whenConnectToEndpoint() throws Exception {
 
-        Car car = new Car("Porsche", "Panamera", "5443123221234", Color.Black, 2011, null);
         BDDMockito.given(carService.getAllCars()).willReturn(Arrays.asList(car));
 
         mockMvc.perform(get("/api/cars/list"))
@@ -61,6 +82,7 @@ public class CarControllerTest {
                 .andExpect(model().attribute("listOfCars", hasSize(1)))
                 .andExpect(model().attribute("listOfCars", hasItem(
                         allOf(
+                                hasProperty("id", is(1)),
                                 hasProperty("brand", is("Porsche")),
                                 hasProperty("model", is("Panamera")),
                                 hasProperty("vinNumber", is("5443123221234")),
@@ -74,25 +96,22 @@ public class CarControllerTest {
     @Test
     void shouldReturnProperValue_afterAddDistanceToCar(){
 
-        Car car = new Car("Porsche", "Panamera", "5443123221234", Color.Black, 2011, null);
-        Route route = new Route();
-        route.setDistance(103560.00);
-
-        car.setRouteDurationAndDistance(route);
-
-        Assertions.assertEquals(103.56, car.getDistance());
+        car.setRouteDurationAndDistance(oldRoute);
+        Assertions.assertEquals(145.67, car.getDistance());
 
     }
 
-        @Test
-        void shouldReturnDistanceEqualsToZero_afterdeleteRoute(){
-            Car car = new Car("Porsche", "Panamera", "5443123221234", Color.Black, 2011, null);
-            Route route = new Route();
-            car.deleteRouteAndUpdateTimeDistance(route);
+    @Test
+    void shouldReturnDistanceEqualsToZero_afterChangeRoute(){
 
-            Assertions.assertEquals(0.00, car.getDistance());
+        car.setRouteDurationAndDistance(oldRoute);
+        oldRoute.setCar(car);
 
-        }
+        car.updateRouteDurationAndDistance(car, newRoute, oldRoute);
+
+        Assertions.assertEquals(105.67, car.getDistance());
+
+    }
 
 
 }

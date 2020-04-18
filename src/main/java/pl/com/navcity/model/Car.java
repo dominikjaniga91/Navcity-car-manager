@@ -54,6 +54,17 @@ public class Car {
     @JoinColumn(name="car_id")
     private List<Route> routeList = new ArrayList<>();
 
+    public Car(Integer id, String brand, String model, String vinNumber, Color color, int productionYear, String notes) {
+        this.id = id;
+        this.brand = brand;
+        this.model = model;
+        this.vinNumber = vinNumber;
+        this.color = color;
+        this.productionYear = productionYear;
+        this.notes = notes;
+
+    }
+
     public Car(String brand, String model, String vinNumber, Color color, int productionYear, String notes) {
         this.brand = brand;
         this.model = model;
@@ -143,13 +154,11 @@ public class Car {
     }
 
     public void updateDistance(double newDistance, double oldDistance){
-        double difference = newDistance - oldDistance;
-        this.duration += difference;
+        this.distance += newDistance - oldDistance;
     }
 
     public void updateDuration(double newDuration, double oldDuration){
-        double difference = newDuration - oldDuration;
-        this.distance += difference;
+        this.duration += newDuration - oldDuration;
     }
 
     public double getDuration() {
