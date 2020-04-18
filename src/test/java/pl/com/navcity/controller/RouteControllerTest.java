@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.BDDMockito;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
@@ -66,11 +67,15 @@ public class RouteControllerTest {
                 .andExpect(model().attribute("listOfRoutes", hasItem(
                         allOf(
                              hasProperty("routeName", is("Zakopianka")),
-                             hasProperty("departureDate", is(LocalDateTime.of(LocalDate.of(2020, 5,5), LocalTime.of(10,0,0)))),
-                             hasProperty("arrivalDate", is(LocalDateTime.of(LocalDate.of(2020, 5,5), LocalTime.of(12,0,0)))),
+                             hasProperty("departureDate", is(LocalDateTime.of(LocalDate.of(2020, 5,5),
+                                                             LocalTime.of(10,0,0)))),
+                             hasProperty("arrivalDate", is(LocalDateTime.of(LocalDate.of(2020, 5,5),
+                                                           LocalTime.of(12,0,0)))),
                              hasProperty("departureAddress", is("Kraków")),
                              hasProperty("destinationAddress", is("Zakopane"))
 
                         ))));
+        BDDMockito.verify(routeService, Mockito.times(1)).getAllRoutes();
+        BDDMockito.verifyNoMoreInteractions(routeService);
     }
 }
