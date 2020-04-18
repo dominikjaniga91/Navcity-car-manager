@@ -15,6 +15,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import pl.com.navcity.service.CarServiceImpl;
+import pl.com.navcity.service.DriverServiceImpl;
 import pl.com.navcity.service.RouteServiceImpl;
 
 import javax.validation.Valid;
@@ -24,10 +26,10 @@ import javax.validation.Valid;
 public class RouteController {
 
     @Autowired
-    CarRepositoryImpl carDao;
+    CarServiceImpl carService;
 
     @Autowired
-    DriverRepositoryImpl driverDao;
+    DriverServiceImpl driverService;
 
     @Autowired
     RouteServiceImpl routeService;
@@ -41,8 +43,8 @@ public class RouteController {
     @GetMapping(path="/route-form")
     public String prepareAddNewRouteForm(@RequestParam(value = "routeId", required = false) Integer routeId, Model model){
 
-        model.addAttribute("listOfCars", carDao.findAll());
-        model.addAttribute("listOfDrivers", driverDao.findAll());
+        model.addAttribute("listOfCars", carService.getAllCars());
+        model.addAttribute("listOfDrivers", driverService.getAllDrivers());
 
         if(routeId != null){
             model.addAttribute("route", routeService.getRouteById(routeId));
@@ -68,8 +70,8 @@ public class RouteController {
                               Model model){
 
         if(bindingResult.hasErrors()){
-            model.addAttribute("listOfCars", carDao.findAll());
-            model.addAttribute("listOfDrivers", driverDao.findAll());
+            model.addAttribute("listOfCars", carService.getAllCars());
+            model.addAttribute("listOfDrivers", driverService.getAllDrivers());
             return "addRoute";
         }
 
@@ -77,17 +79,17 @@ public class RouteController {
 
         if(routeId == null){
 
-            Car car = carDao.getCarById(carId);
+            Car car = carService.getCarById(carId);
             car.setRouteDurationAndDistance(newRoute);
-            Driver driver = driverDao.getDriverById(driverId);
+            Driver driver = driverService.getDriverById(driverId);
             driver.setRouteDurationAndDistance(newRoute);
             routeService.saveRoute(newRoute);
 
         }else{
             Route oldRoute = routeService.getRouteById(routeId);
-            Car newCar = carDao.getCarById(carId);
+            Car newCar = carService.getCarById(carId);
             newCar.updateRouteDurationAndDistance(newCar, newRoute, oldRoute);
-            Driver newDriver = driverDao.getDriverById(driverId);
+            Driver newDriver = driverService.getDriverById(driverId);
             newDriver.updateRouteDurationAndDistance(newDriver, newRoute, oldRoute);
             routeService.updateRoute(newRoute, oldRoute);
         }

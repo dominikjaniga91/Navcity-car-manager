@@ -19,7 +19,6 @@ public class CarServiceImpl implements CarService{
 
     @Override
     public List<Car> getAllCars(){
-        System.out.println(Arrays.toString(carDao.findAll().toArray()));
         return carDao.findAll();
     }
 

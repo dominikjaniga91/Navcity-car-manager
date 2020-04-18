@@ -1,5 +1,6 @@
 package pl.com.navcity.controller;
 
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,11 +13,14 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
-import pl.com.navcity.model.Car;
-import pl.com.navcity.model.Color;
+import pl.com.navcity.model.Route;
 import pl.com.navcity.service.CarServiceImpl;
+import pl.com.navcity.service.DriverServiceImpl;
 import pl.com.navcity.service.RouteServiceImpl;
 import pl.com.navcity.service.UserDetailsServiceImpl;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Arrays;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -24,46 +28,49 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.hamcrest.Matchers.*;
 
 @ExtendWith(SpringExtension.class)
-@WebMvcTest(value = CarController.class)
+@WebMvcTest(value = RouteController.class)
 @EnableAutoConfiguration(exclude = {SecurityAutoConfiguration.class})
-public class CarControllerTest {
+public class RouteControllerTest {
 
 
     @Autowired
     MockMvc mockMvc;
 
     @MockBean
+    RouteServiceImpl routeService;
+
+    @MockBean
     CarServiceImpl carService;
 
     @MockBean
-    RouteServiceImpl routeService;
+    DriverServiceImpl driverService;
 
     @MockBean
     UserDetailsServiceImpl userDetailsService;
 
-
     @BeforeEach
     void setUp(){
-        Car car = new Car("Porsche", "Panamera", "5443123221234", Color.Black, 2011, null);
-        BDDMockito.given(carService.getAllCars()).willReturn(Arrays.asList(car));
+        Route route = new Route("Zakopianka",
+                LocalDateTime.of(LocalDate.of(2020, 5,5), LocalTime.of(10,0,0)),
+                LocalDateTime.of(LocalDate.of(2020, 5,5), LocalTime.of(12,0,0)),
+                "Kraków", "Zakopane");
+        BDDMockito.given(routeService.getAllRoutes()).willReturn(Arrays.asList(route));
     }
 
     @Test
-    @WithMockUser(username = "Dominik", roles = {"ADMIN", "MANAGER"})
-    void resultShouldMatchCar_whenConnectToEndpoint() throws Exception {
+    @WithMockUser(username = "Damian", roles = {"ADMIN"})
+    void shouldMatchRoute_afterHitToEndpointGetAllRoutes() throws Exception{
 
-        mockMvc.perform(get("/api/cars/list"))
+        mockMvc.perform(get("/api/routes/list"))
                 .andExpect(status().isOk())
-                .andExpect(model().attribute("listOfCars", hasSize(1)))
-                .andExpect(model().attribute("listOfCars", hasItem(
+                .andExpect(model().attribute("listOfRoutes", hasItem(
                         allOf(
-                                hasProperty("brand", is("Porsche")),
-                                hasProperty("model", is("Panamera")),
-                                hasProperty("vinNumber", is("5443123221234")),
-                                hasProperty("color", is(Color.Black)),
-                                hasProperty("productionYear", is(2011)),
-                                hasProperty("notes", is(nullValue()))
-                        ))));
+                             hasProperty("routeName", is("Zakopianka")),
+                             hasProperty("departureDate", is(LocalDateTime.of(LocalDate.of(2020, 5,5), LocalTime.of(10,0,0)))),
+                             hasProperty("arrivalDate", is(LocalDateTime.of(LocalDate.of(2020, 5,5), LocalTime.of(12,0,0)))),
+                             hasProperty("departureAddress", is("Kraków")),
+                             hasProperty("destinationAddress", is("Zakopane"))
 
+                        ))));
     }
 }
