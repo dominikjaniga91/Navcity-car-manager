@@ -106,4 +106,24 @@ public class DriverControllerTest {
         Assertions.assertEquals(105.67, driver.getDistance());
 
     }
+
+
+    @Test
+    void shouldReturnProperDuration_afterAddRouteToDriver(){
+
+        driver.setRouteDurationAndDistance(oldRoute);
+        Assertions.assertEquals(123535, driver.getDuration());
+    }
+
+    @Test
+    void shouldReturnProperDuration_afterChangeRoute(){
+
+        driver.setRouteDurationAndDistance(oldRoute);
+        oldRoute.setDriver(driver);
+
+        driver.updateRouteDurationAndDistance(driver, newRoute, oldRoute);
+
+        Assertions.assertEquals(123456, driver.getDuration());
+
+    }
 }
