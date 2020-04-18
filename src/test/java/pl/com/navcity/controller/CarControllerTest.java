@@ -132,5 +132,18 @@ public class CarControllerTest {
 
     }
 
+    @Test
+    void shouldReturnProperDistance_afterChangeCar(){
+        Car newCar = new Car(2, "Porsche", "Panamera", "5443123221234", Color.Black, 2011, null);
+        car.setRouteDurationAndDistance(oldRoute);
+        oldRoute.setCar(car);
+
+        car.updateRouteDurationAndDistance(newCar, oldRoute, oldRoute);
+
+        Assertions.assertEquals(0.00, car.getDistance());
+        Assertions.assertEquals(145.67, newCar.getDistance());
+
+    }
+
 }
 
