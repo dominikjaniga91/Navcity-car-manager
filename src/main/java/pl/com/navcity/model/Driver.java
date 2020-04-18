@@ -23,7 +23,7 @@ public class Driver {
     @NotEmpty(message = "{empty.correctlength}")
     @NotBlank(message = "{blank.correctlength}")
     @Column(name="first_name")
-    private String firtsName;
+    private String firstName;
 
     @NotEmpty(message = "{empty.correctlength}")
     @NotBlank(message = "{blank.correctlength}")
@@ -46,9 +46,15 @@ public class Driver {
     @JoinColumn(name="driver_id")
     private List<Route> routeList = new ArrayList<>();
 
+    public Driver(Integer id, String firstName, String lastName, String licence) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.licence = licence;
+    }
 
-    public Driver(String firtsName, String lastName, String licence) {
-        this.firtsName = firtsName;
+    public Driver(String firstName, String lastName, String licence) {
+        this.firstName = firstName;
         this.lastName = lastName;
         this.licence = licence;
     }
@@ -64,12 +70,12 @@ public class Driver {
         this.id = id;
     }
 
-    public String getFirtsName() {
-        return firtsName;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirtsName(String firtsName) {
-        this.firtsName = firtsName;
+    public void setFirstName(String firtsName) {
+        this.firstName = firtsName;
     }
 
     public String getLastName() {
@@ -186,11 +192,11 @@ public class Driver {
     @Override
     public String toString() {
 
-        return  String.format( "%d %s %s %s"  ,id, firtsName,  lastName,  licence);
+        return  String.format( "%d %s %s %s"  ,id, firstName,  lastName,  licence);
     }
 
     public String returnShortDetails() {
 
-        return  String.format( "%s %s "  ,firtsName,  lastName);
+        return  String.format( "%s %s "  , firstName,  lastName);
     }
 }

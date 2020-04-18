@@ -13,8 +13,8 @@
             <form action="/api/drivers/add-driver" style="padding-top: 50px;" th:action="@{/api/drivers/add-driver}" th:object="${driver}" class="mainAddForm" method="POST">
                 <input type="hidden" th:name="driverId" th:value="*{id}">
                 <input type="hidden" th:field="*{id}">
-                <input type="text" class="inputForm" th:field="*{firtsName}" placeholder="First name" required><br>
-                <div class="errorDiv"><p th:if="${#fields.hasErrors('firtsName')}" th:errors="*{firtsName}"></p></div><br/>
+                <input type="text" class="inputForm" th:field="*{firstName}" placeholder="First name" required><br>
+                <div class="errorDiv"><p th:if="${#fields.hasErrors('firtsName')}" th:errors="*{firstName}"></p></div><br/>
                 <input type="text" class="inputForm" th:field="*{lastName}" placeholder="Last name" required><br>
                 <div class="errorDiv"><p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></p></div><br/>
                 <input type="text" class="inputForm" th:field="*{licence}" placeholder="Licence" required><br>

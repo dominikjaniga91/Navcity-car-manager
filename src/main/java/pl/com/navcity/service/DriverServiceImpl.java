@@ -51,7 +51,7 @@ public class DriverServiceImpl implements DriverService {
     public void updateDriver(Integer driverId, Driver driver) {
 
         Driver foundedDriver = driverDao.getDriverById(driverId);
-        foundedDriver.setFirtsName(driver.getFirtsName());
+        foundedDriver.setFirstName(driver.getFirstName());
         foundedDriver.setLastName(driver.getLastName());
         foundedDriver.setLicence(driver.getLicence());
         driverDao.save(foundedDriver);
