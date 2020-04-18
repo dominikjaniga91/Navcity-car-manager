@@ -1,5 +1,6 @@
 package pl.com.navcity.controller;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -84,5 +85,25 @@ public class DriverControllerTest {
 
         BDDMockito.verify(driverService, Mockito.times(1)).getAllDrivers();
         BDDMockito.verifyNoMoreInteractions(driverService);
+    }
+
+
+    @Test
+    void shouldReturnProperDistance_afterAddRouteToDriver(){
+
+        driver.setRouteDurationAndDistance(oldRoute);
+        Assertions.assertEquals(145.67, driver.getDistance());
+    }
+
+    @Test
+    void shouldReturnProperDistance_afterChangeRoute(){
+
+        driver.setRouteDurationAndDistance(oldRoute);
+        oldRoute.setDriver(driver);
+
+        driver.updateRouteDurationAndDistance(driver, newRoute, oldRoute);
+
+        Assertions.assertEquals(105.67, driver.getDistance());
+
     }
 }

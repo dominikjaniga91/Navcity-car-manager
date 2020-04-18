@@ -94,7 +94,7 @@ public class CarControllerTest {
     }
 
     @Test
-    void shouldReturnProperValue_afterAddDistanceToCar(){
+    void shouldReturnProperDistance_afterAddDistanceToCar(){
 
         car.setRouteDurationAndDistance(oldRoute);
         Assertions.assertEquals(145.67, car.getDistance());
@@ -102,7 +102,7 @@ public class CarControllerTest {
     }
 
     @Test
-    void shouldReturnDistanceEqualsToZero_afterChangeRoute(){
+    void shouldReturnProperDistance_afterChangeRoute(){
 
         car.setRouteDurationAndDistance(oldRoute);
         oldRoute.setCar(car);

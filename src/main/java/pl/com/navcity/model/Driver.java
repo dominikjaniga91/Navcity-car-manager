@@ -113,8 +113,7 @@ public class Driver {
     }
 
     public void updateDistance(double newDistance, double oldDistance){
-        double difference = newDistance - oldDistance;
-        this.duration += difference;
+        this.distance += newDistance - oldDistance;
     }
 
     public void decrementDistance(double distance) {
@@ -130,8 +129,7 @@ public class Driver {
     }
 
     public void updateDuration(double newDuration, double oldDuration){
-        double difference = newDuration - oldDuration;
-        this.distance += difference;
+        this.duration += newDuration - oldDuration;
     }
 
     public void decrementDuration(double duration) {
@@ -156,9 +154,9 @@ public class Driver {
 
     public void updateRouteDurationAndDistance(Driver newDriver, Route newRoute, Route oldRoute){
 
-        if(!newDriver.getId().equals(oldRoute.getCar().getId())){
+        if(!newDriver.getId().equals(oldRoute.getDriver().getId())){
 
-            oldRoute.getCar().deleteRouteAndUpdateTimeDistance(oldRoute);
+            oldRoute.getDriver().deleteRouteAndUpdateTimeDistance(oldRoute);
             newDriver.setRouteDurationAndDistance(newRoute);
         } else{
 
@@ -168,7 +166,7 @@ public class Driver {
         }
     }
 
-    public void deleteRouteAndUpdateTimeDistance(Route route, LocalDateTime startDate){
+    public void deleteRouteAndUpdateTimeDistance(Route route){
 
             routeList.remove(route);
             decrementDistance(route.getDistance());
