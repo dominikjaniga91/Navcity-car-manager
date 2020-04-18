@@ -22,8 +22,6 @@ import pl.com.navcity.model.Route;
 import pl.com.navcity.service.CarServiceImpl;
 import pl.com.navcity.service.RouteServiceImpl;
 import pl.com.navcity.service.UserDetailsServiceImpl;
-
-import javax.validation.Valid;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -106,9 +104,7 @@ public class CarControllerTest {
 
         car.setRouteDurationAndDistance(oldRoute);
         oldRoute.setCar(car);
-
         car.updateRouteDurationAndDistance(car, newRoute, oldRoute);
-
         Assertions.assertEquals(105.67, car.getDistance());
 
     }
@@ -125,9 +121,7 @@ public class CarControllerTest {
 
         car.setRouteDurationAndDistance(oldRoute);
         oldRoute.setCar(car);
-
         car.updateRouteDurationAndDistance(car, newRoute, oldRoute);
-
         Assertions.assertEquals(123456, car.getDuration());
 
     }
@@ -137,9 +131,7 @@ public class CarControllerTest {
         Car newCar = new Car(2, "Porsche", "Panamera", "5443123221234", Color.Black, 2011, null);
         car.setRouteDurationAndDistance(oldRoute);
         oldRoute.setCar(car);
-
         car.updateRouteDurationAndDistance(newCar, oldRoute, oldRoute);
-
         Assertions.assertEquals(0.00, car.getDistance());
         Assertions.assertEquals(145.67, newCar.getDistance());
 

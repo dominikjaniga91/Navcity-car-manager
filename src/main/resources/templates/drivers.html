@@ -44,7 +44,7 @@
                     <td  th:text="${driver.firstName}"></td>
                     <td  th:text="${driver.lastName}"></td>
                     <td  th:text="${driver.licence}"> </td>
-                    <td  th:text="${driver.distance}"> </td>
+                    <td  th:text="${driver.getRoundedDistance()}"> </td>
                     <td  th:text="${driver.getLocalTimeDuration()}"> </td>
                     <td>
                         <a th:href="@{/api/drivers/delete-driver(driverId=${driver.id})}">

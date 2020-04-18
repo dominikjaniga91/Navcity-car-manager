@@ -51,7 +51,7 @@
                         <td  th:text="${route.destinationAddress}"></td>
                         <td  th:text="${route?.car?.returnShortDetails()}"></td>
                         <td  th:text="${route?.driver?.returnShortDetails()}"></td>
-                        <td  th:text="${route.distance}"></td>
+                        <td  th:text="${route.getRoundedDistance()}"></td>
                         <td  th:text="${route.getLocalTimeDuration()}"></td>
                         <td>
                             <a th:href="@{/api/routes/delete-route(routeId=${route.id})}">

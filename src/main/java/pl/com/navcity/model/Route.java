@@ -133,7 +133,6 @@ public class Route {
         this.destinationAddress = destinationAddress;
     }
 
-    //Method use to set initial distance
     public void setDistance(Double distance) {
 
         this.distance = distance/1000;
@@ -143,7 +142,10 @@ public class Route {
         return distance;
     }
 
-    //Method use to set initial duration
+    public String getRoundedDistance(){
+        return String.format("%.2f",distance);
+    }
+
     public void setDuration(Double duration) {
 
         this.duration = duration / 3600;

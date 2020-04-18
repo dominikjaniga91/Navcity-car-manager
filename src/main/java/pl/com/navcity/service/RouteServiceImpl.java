@@ -40,6 +40,8 @@ public class RouteServiceImpl implements RouteService {
         Route route = routeDao.getRouteById(routeId);
         Car car = route.getCar();
         car.deleteRouteAndUpdateTimeDistance(route);
+        Driver driver = route.getDriver();
+        driver.deleteRouteAndUpdateTimeDistance(route);
         routeDao.deleteById(routeId);
     }
 

@@ -149,6 +149,10 @@ public class Car {
         return distance;
     }
 
+    public String getRoundedDistance(){
+        return String.format("%.2f",distance);
+    }
+
     public void setDistance(double distance) {
         this.distance += distance;
     }

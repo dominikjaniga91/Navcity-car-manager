@@ -105,7 +105,7 @@ public class Driver {
     /* -------------------------  distance and duration -------------------------------*/
 
     public Double getDistance() {
-        return distance;
+        return  distance;
     }
 
     public void setDistance(Double distance) {
@@ -122,6 +122,10 @@ public class Driver {
 
     public double getDuration() {
         return duration;
+    }
+
+    public String getRoundedDistance(){
+        return String.format("%.2f" ,distance);
     }
 
     public void setDuration(double duration) {
@@ -145,9 +149,8 @@ public class Driver {
     }
 
     public void setRouteDurationAndDistance(Route route){
-        if(!routeList.contains(route)){
-            routeList.add(route);
-        }
+
+        routeList.add(route);
         setDistance(route.getDistance());
         setDuration(route.getDuration());
     }
