@@ -12,8 +12,8 @@ public interface RouteService {
 
     void deleteRouteById(Integer routeId);
 
-    void updateRoute(Route newRoute, Route oldRoute);
+    void updateRoute(Route newRoute, Integer routeId, Integer carId, Integer driverId);
 
-    void saveRoute(Route route);
+    void saveRoute(Route route, Integer carId, Integer driverId);
 
 }

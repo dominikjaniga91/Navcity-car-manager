@@ -75,23 +75,11 @@ public class RouteController {
             return "addRoute";
         }
 
-        System.out.println(" route id " + routeId);
-
         if(routeId == null){
-
-            Car car = carService.getCarById(carId);
-            car.setRouteDurationAndDistance(newRoute);
-            Driver driver = driverService.getDriverById(driverId);
-            driver.setRouteDurationAndDistance(newRoute);
-            routeService.saveRoute(newRoute);
-
+            routeService.saveRoute(newRoute, carId, driverId);
         }else{
-            Route oldRoute = routeService.getRouteById(routeId);
-            Car newCar = carService.getCarById(carId);
-            newCar.updateRouteDurationAndDistance(newCar, newRoute, oldRoute);
-            Driver newDriver = driverService.getDriverById(driverId);
-            newDriver.updateRouteDurationAndDistance(newDriver, newRoute, oldRoute);
-            routeService.updateRoute(newRoute, oldRoute);
+
+            routeService.updateRoute(newRoute, routeId, carId, driverId);
         }
         return "redirect:/api/routes/list";
     }

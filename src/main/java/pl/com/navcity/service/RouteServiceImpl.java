@@ -2,6 +2,7 @@ package pl.com.navcity.service;
 
 
 import pl.com.navcity.model.Car;
+import pl.com.navcity.model.Driver;
 import pl.com.navcity.model.Route;
 import pl.com.navcity.repository.RouteRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +13,16 @@ import java.util.List;
 @Service
 public class RouteServiceImpl implements RouteService {
 
+    private RouteRepositoryImpl routeDao;
+    private CarServiceImpl carService;
+    private DriverServiceImpl driverService;
 
     @Autowired
-    RouteRepositoryImpl routeDao;
+    public RouteServiceImpl(RouteRepositoryImpl routeDao, CarServiceImpl carService, DriverServiceImpl driverService) {
+        this.routeDao = routeDao;
+        this.carService = carService;
+        this.driverService = driverService;
+    }
 
     @Override
     public Route getRouteById(Integer routeId){
@@ -36,7 +44,13 @@ public class RouteServiceImpl implements RouteService {
     }
 
     @Override
-    public void updateRoute(Route newRoute, Route oldRoute) {
+    public void updateRoute(Route newRoute, Integer routeId, Integer carId, Integer driverId) {
+
+        Route oldRoute = routeDao.getRouteById(routeId);
+        Car newCar = carService.getCarById(carId);
+        newCar.updateRouteDurationAndDistance(newCar, newRoute, oldRoute);
+        Driver newDriver = driverService.getDriverById(driverId);
+        newDriver.updateRouteDurationAndDistance(newDriver, newRoute, oldRoute);
 
         oldRoute.setRouteName(newRoute.getRouteName());
         oldRoute.setDepartureDate(newRoute.getDepartureDate());
@@ -51,7 +65,13 @@ public class RouteServiceImpl implements RouteService {
     }
 
     @Override
-    public void saveRoute(Route route) {
+    public void saveRoute(Route route, Integer carId, Integer driverId) {
+
+        Car car = carService.getCarById(carId);
+        car.setRouteDurationAndDistance(route);
+        Driver driver = driverService.getDriverById(driverId);
+        driver.setRouteDurationAndDistance(route);
+
         routeDao.save(route);
     }
 }
