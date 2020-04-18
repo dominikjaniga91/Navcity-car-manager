@@ -49,7 +49,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .permitAll()
                 .and()
                     .exceptionHandling()
-                    .accessDeniedPage("/access-denied");
+                    .accessDeniedPage("/access-denied")
+                .and()
+                    .sessionManagement()
+                    .maximumSessions(1)
+                    .expiredUrl("/login-form");
 
         http.csrf().disable();
         http.headers().frameOptions().disable();
