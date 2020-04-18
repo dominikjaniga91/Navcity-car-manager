@@ -113,5 +113,24 @@ public class CarControllerTest {
 
     }
 
+    @Test
+    void shouldReturnProperDuration_afterAddRouteToDriver(){
+
+        car.setRouteDurationAndDistance(oldRoute);
+        Assertions.assertEquals(123535, car.getDuration());
+    }
+
+    @Test
+    void shouldReturnProperDuration_afterChangeRoute(){
+
+        car.setRouteDurationAndDistance(oldRoute);
+        oldRoute.setCar(car);
+
+        car.updateRouteDurationAndDistance(car, newRoute, oldRoute);
+
+        Assertions.assertEquals(123456, car.getDuration());
+
+    }
 
 }
+
